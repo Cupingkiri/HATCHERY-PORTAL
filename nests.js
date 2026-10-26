@@ -478,7 +478,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-09-1",
     eggCount: 106,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-21",         // still incubating
     adopter: null
   },
   {
@@ -496,7 +496,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-09-1",
     eggCount: 72,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-24",         // still incubating
     adopter: "Ulli & Julia"
   },
   {
@@ -505,7 +505,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-09-1",
     eggCount: 73,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-24",         // still incubating
     adopter: null
   },
   {
@@ -514,7 +514,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-09-1",
     eggCount: 57,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-24",         // still incubating
     adopter: null
   },
   {
@@ -523,7 +523,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-09-1",
     eggCount: 85,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-22",         // still incubating
     adopter: null
   },
   {
@@ -532,7 +532,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-09-1",
     eggCount: 87,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-22",         // still incubating
     adopter: null
   },
     {
@@ -541,7 +541,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-31",
     eggCount: 106,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-21",         // still incubating
     adopter: null
   },
    {
@@ -550,7 +550,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-30",
     eggCount: 108,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-21",         // still incubating
     adopter: null
   },
    {
@@ -559,7 +559,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-30",
     eggCount: 81,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: null
   },
    {
@@ -568,7 +568,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-30",
     eggCount: 136,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: "Dania Sigrist"
   },
    {
@@ -577,7 +577,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-30",
     eggCount: 63,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-21",         // still incubating
     adopter: null
   },
    {
@@ -586,7 +586,7 @@ const nestsData = [
     species: 2,               // 2 = Hawksbill Turtle
     layDate: "2026-08-29",
     eggCount: 141,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-23",         // still incubating
     adopter: null
   },
    {
@@ -595,7 +595,7 @@ const nestsData = [
     species: 2,               // 2 = Hawksbill Turtle
     layDate: "2026-08-29",
     eggCount: 126,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-24",         // still incubating
     adopter: null
   },
    {
@@ -604,7 +604,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-29",
     eggCount: 168,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-21",         // still incubating
     adopter: "Dania Sigrist"
   },
    {
@@ -613,7 +613,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-29",
     eggCount: 65,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-20",         // still incubating
     adopter: "Gavin & Marian"
   },
    {
@@ -622,7 +622,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-29",
     eggCount: 107,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: "Jennifer Clarewatton"
   },
    {
@@ -631,7 +631,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-29",
     eggCount: 77,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: null
   },
    {
@@ -640,7 +640,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-28",
     eggCount: 95,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: "Flynn & Freddie"
   },
    {
@@ -649,7 +649,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-28",
     eggCount: 65,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: null
   },
    {
@@ -658,7 +658,7 @@ const nestsData = [
     species: 2,               // 2 = Hawksbill Turtle
     layDate: "2026-08-28",
     eggCount: 136,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-20",         // still incubating
     adopter: "Mirjam Knies"
   },
    {
@@ -667,7 +667,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-27",
     eggCount: 105,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-18",         // still incubating
     adopter: null
   },
    {
@@ -676,7 +676,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-23",
     eggCount: 108,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-17",         // still incubating
     adopter: "Viola Bianchi"
   },
  {
@@ -685,7 +685,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-23",
     eggCount: 56,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-19",         // still incubating
     adopter: null
   },
    {
@@ -694,7 +694,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-23",
     eggCount: 79,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-16",         // still incubating
     adopter: null
   },
    {
@@ -703,7 +703,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-21",
     eggCount: 111,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-10",         // still incubating
     adopter: "Gueldenpfennig"
   },
    {
@@ -712,7 +712,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-20",
     eggCount: 89,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-10",         // still incubating
     adopter: "Yu Ching Ho"
   },
    {
@@ -721,7 +721,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-20",
     eggCount: 134,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-10",         // still incubating
     adopter: "Raye"
   },
    {
@@ -730,7 +730,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-20",
     eggCount: 114,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-15",         // still incubating
     adopter: "Amanda Teoh"
   },
    {
@@ -739,7 +739,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-18",
     eggCount: 62,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-10",         // still incubating
     adopter: null
   },
    {
@@ -748,7 +748,7 @@ const nestsData = [
     species: 1,               // 1 = Green Turtle
     layDate: "2026-08-18",
     eggCount: 71,
-    hatchedDay: null,         // still incubating
+    hatchedDay: "2026-10-10",         // still incubating
     adopter: null
   },
    {
@@ -784,7 +784,7 @@ const nestsData = [
     species: 2,               // 2 = hawksbill Turtle
     layDate: "2026-08-14",
     eggCount: 157,
-    hatchedDay: "2026-10-9",         // still incubating
+    hatchedDay: "2026-10-16",         // still incubating
     adopter: "Belford Tan"
   },
    {
