@@ -921,3 +921,50 @@ button {
     scroll-behavior: auto !important;
   }
 }
+  
+/* -------------------------------------------------------------
+   12. PAGINATION
+   ------------------------------------------------------------- */
+.pagination {
+  display: none; /* Hidden by default; script.js shows it when needed */
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--slate-200);
+}
+
+.pagination.is-visible {
+  display: flex;
+}
+
+.pagination__info {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  text-align: center;
+}
+
+.pagination__btn {
+  flex: 1;
+  max-width: 140px; /* Keeps the buttons from stretching too far on desktop */
+}
+
+/* Disabled state for pagination buttons */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (min-width: 600px) {
+  .pagination {
+    justify-content: center;
+    gap: 24px;
+  }
+  
+  .pagination__btn {
+    flex: 0 0 auto;
+  }
+}

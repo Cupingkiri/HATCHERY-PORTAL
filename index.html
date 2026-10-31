@@ -112,6 +112,24 @@
       <p class="empty-state__text">Try a different nest number, adopter name, year or status.</p>
       <button type="button" class="btn btn--ghost" id="clearFiltersBtn">Clear all filters</button>
     </div>
+        <!-- Shown when no nests match the current filters -->
+    <div class="empty-state" id="emptyState" role="status">
+      <span class="empty-state__icon" aria-hidden="true">🔍</span>
+      <h2 class="empty-state__title">No nests found matching your query.</h2>
+      <p class="empty-state__text">Try a different nest number, adopter name, year or status.</p>
+      <button type="button" class="btn btn--ghost" id="clearFiltersBtn">Clear all filters</button>
+    </div>
+
+    <!-- Pagination Controls (NEW) -->
+    <nav class="pagination" id="pagination" aria-label="Nest list pages">
+      <button type="button" class="btn btn--ghost pagination__btn" id="prevPageBtn" aria-label="Previous page">
+        ← Previous
+      </button>
+      <span class="pagination__info" id="pageInfo">Page 1 of 1</span>
+      <button type="button" class="btn btn--ghost pagination__btn" id="nextPageBtn" aria-label="Next page">
+        Next →
+      </button>
+    </nav>
   </main>
 
   <!-- ============================================================

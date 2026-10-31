@@ -96,7 +96,13 @@
     search: document.getElementById("searchInput"),
     year: document.getElementById("yearFilter"),
     status: document.getElementById("statusFilter"),
-    adoption: document.getElementById("adoptionFilter"),   // ← NEW
+    adoption: document.getElementById("adoptionFilter"),
+    // NEW PAGINATION ELEMENTS
+    pagination: document.getElementById("pagination"),
+    prevPageBtn: document.getElementById("prevPageBtn"),
+    nextPageBtn: document.getElementById("nextPageBtn"),
+    pageInfo: document.getElementById("pageInfo"),
+    // MODAL ELEMENTS
     overlay: document.getElementById("modalOverlay"),
     modal: document.getElementById("nestModal"),
     modalClose: document.getElementById("modalClose"),
@@ -308,6 +314,11 @@
 
   var allNests = [];
 
+    /* --- PAGINATION STATE (NEW) --- */
+  var currentPage = 1;
+  var itemsPerPage = 100;
+  var currentFilteredNests = []; // Holds the full list of filtered items before slicing
+
   function buildDataset() {
     if (typeof nestsData === "undefined" || !Array.isArray(nestsData)) {
       els.grid.innerHTML =
@@ -435,17 +446,16 @@
     els.grid.innerHTML = html;
   }
 
-  function updateResultCount(shown, total) {
+  function updateResultCount(start, end, total) {
     if (!total) {
       els.resultCount.textContent = "";
       return;
     }
-    if (shown === total) {
-      els.resultCount.textContent =
-        "Showing all " + total + " nest" + (total === 1 ? "" : "s");
+    
+    if (total === 1) {
+      els.resultCount.textContent = "Showing 1 nest";
     } else {
-      els.resultCount.textContent =
-        "Showing " + shown + " of " + total + " nests";
+      els.resultCount.textContent = "Showing " + start + "–" + end + " of " + total + " nests";
     }
   }
 
@@ -486,22 +496,20 @@
     var statusValue = els.status.value;
     var adoptionValue = els.adoption.value;
 
-    var filtered = allNests.filter(function (nest) {
+    currentFilteredNests = allNests.filter(function (nest) {
       if (yearValue !== "all" && String(nest.year) !== yearValue) return false;
       if (statusValue !== "all" && nest._status !== statusValue) return false;
-
-      /* --- Adoption availability filter ---
-         "available" → nests with no adopter
-         "adopted"   → nests that have an adopter       */
       if (adoptionValue === "available" && nest.adopter) return false;
       if (adoptionValue === "adopted" && !nest.adopter) return false;
-
       if (query && !matchesQuery(nest, query)) return false;
       return true;
     });
 
-    renderGrid(filtered);
-    updateResultCount(filtered.length, allNests.length);
+    // NEW: Reset to page 1 whenever filters change
+    currentPage = 1;
+    
+    // NEW: Trigger the pagination render instead of direct render
+    renderPaginatedGrid();
   }
 
   function clearFilters() {
@@ -511,6 +519,62 @@
     els.adoption.value = "all";   // ← NEW
     applyFilters();
     els.search.focus();
+  }
+    /* -----------------------------------------------------------
+     10b. PAGINATION LOGIC (NEW)
+     ----------------------------------------------------------- */
+
+  function renderPaginatedGrid() {
+    var totalItems = currentFilteredNests.length;
+    var totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // If no items, hide grid and pagination, show empty state
+    if (totalItems === 0) {
+      els.grid.innerHTML = "";
+      els.grid.hidden = true;
+      els.emptyState.classList.add("is-visible");
+      els.pagination.classList.remove("is-visible");
+      updateResultCount(0, 0);
+      return;
+    }
+
+    els.grid.hidden = false;
+    els.emptyState.classList.remove("is-visible");
+
+    // Calculate slice boundaries
+    var startIndex = (currentPage - 1) * itemsPerPage;
+    var endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+    
+    // Get only the 100 items for the current page
+    var pageNests = currentFilteredNests.slice(startIndex, endIndex);
+
+    // Render the 100 cards
+    renderGrid(pageNests);
+    
+    // Update the "Showing X of Y" text
+    updateResultCount(startIndex + 1, endIndex, totalItems);
+
+    // Update pagination buttons
+    if (totalPages > 1) {
+      els.pagination.classList.add("is-visible");
+      els.pageInfo.textContent = "Page " + currentPage + " of " + totalPages;
+      
+      els.prevPageBtn.disabled = (currentPage === 1);
+      els.nextPageBtn.disabled = (currentPage === totalPages);
+    } else {
+      els.pagination.classList.remove("is-visible");
+    }
+  }
+
+  function goToPage(pageNumber) {
+    currentPage = pageNumber;
+    renderPaginatedGrid();
+    
+    // Smooth scroll back to the top of the main content so the user sees the new cards
+    var mainContent = document.querySelector(".main");
+    if (mainContent) {
+      mainContent.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   /* -----------------------------------------------------------
@@ -643,9 +707,20 @@
     els.search.addEventListener("input", applyFilters);
     els.year.addEventListener("change", applyFilters);
     els.status.addEventListener("change", applyFilters);
-    els.adoption.addEventListener("change", applyFilters);   // ← NEW
+    els.adoption.addEventListener("change", applyFilters);
     els.clearFiltersBtn.addEventListener("click", clearFilters);
 
+    // --- Pagination (NEW) -------------------------------------
+    els.prevPageBtn.addEventListener("click", function () {
+      if (currentPage > 1) goToPage(currentPage - 1);
+    });
+
+    els.nextPageBtn.addEventListener("click", function () {
+      var totalPages = Math.ceil(currentFilteredNests.length / itemsPerPage);
+      if (currentPage < totalPages) goToPage(currentPage + 1);
+    });
+
+    // ... rest of your existing card and modal event listeners below ...
     // --- Card interaction (event delegation) -------------------
     els.grid.addEventListener("click", function (event) {
       var card = event.target.closest(".nest-card");
