@@ -975,5 +975,95 @@ const nestsData = [
     eggCount: 123,
     hatchedDay: "2026-09-29",         // still incubating
     adopter: "Elvira Kerchkoffs"
+  },
+    {
+    id: "Nest #01",
+    year: 2026,
+    species: 2,               // 2 = Hawksbill Turtle
+    layDate: "2026-01-03",
+    eggCount: 103,
+    hatchedDay: "2026-03-12",
+    adopter: null
+  },
+  {
+    id: "Nest #02",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-06",
+    eggCount: 110,
+    hatchedDay: "2026-03-08",
+    adopter: null
+  },
+  {
+    id: "Nest #03",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-07",
+    eggCount: 84,
+    hatchedDay: "2026-03-12",
+    adopter: null
+  },
+  {
+    id: "Nest #04",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-15",
+    eggCount: 87,
+    hatchedDay: "2026-03-19",
+    adopter: null
+  },
+  {
+    id: "Nest #05",
+    year: 2026,
+    species: 2,               // 2 = Hawksbill Turtle
+    layDate: "2026-01-15",
+    eggCount: 92,
+    hatchedDay: "2026-03-24",
+    adopter: null
+  },
+  {
+    id: "Nest #06",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-18",
+    eggCount: 105,
+    hatchedDay: "2026-03-17",
+    adopter: null
+  },
+  {
+    id: "Nest #07",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-17",
+    eggCount: 132,
+    hatchedDay: "2026-03-20",
+    adopter: null
+  },
+  {
+    id: "Nest #08",
+    year: 2026,
+    species: 2,               // 2 = Hawksbill Turtle
+    layDate: "2026-01-19",
+    eggCount: 82,
+    hatchedDay: "2026-03-27",
+    adopter: null
+  },
+  {
+    id: "Nest #09",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-22",
+    eggCount: 66,
+    hatchedDay: "2026-03-25",
+    adopter: null
+  },
+  {
+    id: "Nest #10",
+    year: 2026,
+    species: 1,               // 1 = Green Turtle
+    layDate: "2026-01-24",
+    eggCount: 139,
+    hatchedDay: "2026-03-24",
+    adopter: null
   }
 ];
