@@ -796,7 +796,7 @@
     init();
   }
 })();
-  /* -----------------------------------------------------------
+    /* -----------------------------------------------------------
      14. ADMIN EDITOR (GITHUB API INTEGRATION)
      ----------------------------------------------------------- */
      
@@ -858,7 +858,8 @@
       adminEditorView.style.display = "block";
       
       adminNestSelect.innerHTML = "";
-      allNests.forEach(function(nest) {
+      // Sort descending so newest nests are at the top of the dropdown
+      allNests.sort((a, b) => b.id.localeCompare(a.id)).forEach(function(nest) {
         var opt = document.createElement("option");
         opt.value = nest.id;
         opt.textContent = nest.id + " - " + nest.species;
@@ -872,6 +873,7 @@
       tabAddBtn.style.background = "var(--slate-100)"; tabAddBtn.style.color = "var(--slate-500)";
       formEdit.style.display = "block"; formAdd.style.display = "none";
       adminModalTitle.textContent = "Update Nest Record";
+      adminStatus.textContent = "";
     });
 
     tabAddBtn.addEventListener("click", function() {
@@ -879,6 +881,7 @@
       tabEditBtn.style.background = "var(--slate-100)"; tabEditBtn.style.color = "var(--slate-500)";
       formAdd.style.display = "block"; formEdit.style.display = "none";
       adminModalTitle.textContent = "Add New Nest";
+      adminStatus.textContent = "";
     });
 
     // --- Edit Form Logic ---
@@ -886,7 +889,15 @@
       var nestId = this.value;
       var rawNest = nestsData.find(function(n) { return n.id === nestId; });
       if (!rawNest) return;
-      adminHatchDate.value = rawNest.hatchedDay || "";
+      
+      // Handle date formatting safely for the input field
+      if (rawNest.hatchedDay) {
+        // If it's a valid string like "2026-11-05", it should populate directly
+        adminHatchDate.value = rawNest.hatchedDay;
+      } else {
+        adminHatchDate.value = "";
+      }
+      
       adminAdopter.value = rawNest.adopter || "";
       adminStatus.textContent = "";
     });
@@ -921,6 +932,7 @@
       var newHatch = adminHatchDate.value || null;
       var newAdopter = adminAdopter.value.trim() || null;
       
+      this.disabled = true;
       adminStatus.textContent = "Updating GitHub...";
       adminStatus.style.color = "var(--slate-700)";
       
@@ -941,13 +953,16 @@
         
         await pushToGitHub(newContent, "Admin update: " + nestId);
         
-        adminStatus.textContent = "✅ Updated! Refreshing in 3s...";
+        adminStatus.textContent = "✅ Updated! GitHub Pages is deploying. Please wait 15 seconds...";
         adminStatus.style.color = "var(--emerald-600)";
-        setTimeout(function() { window.location.reload(); }, 3000);
+        
+        // Wait 15 seconds so you can't accidentally overwrite the file while GitHub is updating
+        setTimeout(function() { window.location.reload(); }, 15000);
 
       } catch (err) {
         adminStatus.textContent = "❌ Error: " + err.message;
         adminStatus.style.color = "red";
+        this.disabled = false;
       }
     });
 
@@ -963,6 +978,7 @@
         return alert("Please fill in Nest ID, Egg Count, and Lay Date.");
       }
       
+      this.disabled = true;
       adminStatus.textContent = "Publishing to GitHub...";
       adminStatus.style.color = "var(--slate-700)";
       
@@ -980,13 +996,15 @@
         
         await pushToGitHub(newContent, "Admin added: " + newId);
         
-        adminStatus.textContent = "✅ Added! Refreshing in 3s...";
+        adminStatus.textContent = "✅ Added! GitHub Pages is deploying. Please wait 15 seconds...";
         adminStatus.style.color = "var(--emerald-600)";
-        setTimeout(function() { window.location.reload(); }, 3000);
+        
+        setTimeout(function() { window.location.reload(); }, 15000);
 
       } catch (err) {
         adminStatus.textContent = "❌ Error: " + err.message;
         adminStatus.style.color = "red";
+        this.disabled = false;
       }
     });
   }
