@@ -329,13 +329,16 @@
 
     allNests = nestsData.map(decorateNest);
 
-    // Newest season first, then most recently laid first.
+    // Sort strictly by Nest Number (highest to lowest) so they are in perfect sequence
     allNests.sort(function (a, b) {
-      if (b.year !== a.year) return b.year - a.year;
-      return b._layDate.getTime() - a._layDate.getTime();
+      // 1. Extract just the numbers from the IDs (e.g., "Nest #394" becomes 394)
+      var numA = parseInt(a.id.replace(/\D/g, ''), 10) || 0;
+      var numB = parseInt(b.id.replace(/\D/g, ''), 10) || 0;
+      
+      // 2. Sort descending (394 down to 01)
+      return numB - numA;
     });
   }
-
   /** Fast lookup by nest id for modal opening. */
   function findNestById(id) {
     for (var i = 0; i < allNests.length; i++) {
