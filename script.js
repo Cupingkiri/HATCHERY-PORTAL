@@ -795,124 +795,130 @@
   } else {
     init();
   }
-})();
-    /* -----------------------------------------------------------
+
+  /* -----------------------------------------------------------
      14. ADMIN EDITOR (GITHUB API INTEGRATION)
      ----------------------------------------------------------- */
      
   var isAdminMode = window.location.search.includes("admin=true");
   
   if (isAdminMode) {
-    document.getElementById("floatingAdminBtn").style.display = "block";
+    console.log("Admin mode activated. Loading editor...");
     
+    // 1. GRAB ELEMENTS
     var adminOverlay = document.getElementById("adminOverlay");
+    var floatingBtn = document.getElementById("floatingAdminBtn");
     var adminLoginView = document.getElementById("adminLoginView");
     var adminEditorView = document.getElementById("adminEditorView");
     var adminTokenInput = document.getElementById("adminTokenInput");
+    var adminStatus = document.getElementById("adminStatus");
     
-    // Tabs
     var tabEditBtn = document.getElementById("tabEditBtn");
     var tabAddBtn = document.getElementById("tabAddBtn");
     var formEdit = document.getElementById("formEdit");
     var formAdd = document.getElementById("formAdd");
     var adminModalTitle = document.getElementById("adminModalTitle");
 
-    // Edit Form Elements
     var adminNestSelect = document.getElementById("adminNestSelect");
     var adminHatchDate = document.getElementById("adminHatchDate");
     var adminAdopter = document.getElementById("adminAdopter");
     
-    // Add Form Elements
     var addNestId = document.getElementById("addNestId");
     var addSpecies = document.getElementById("addSpecies");
     var addEggCount = document.getElementById("addEggCount");
     var addLayDate = document.getElementById("addLayDate");
     var addAdopter = document.getElementById("addAdopter");
     
-    var adminStatus = document.getElementById("adminStatus");
-    var repoUrl = "https://api.github.com/repos/Cupingkiri/sea-turtle-hatchery-pilot/contents/nests.js"; // UPDATE THIS URL LATER
+    var repoUrl = "https://api.github.com/repos/Cupingkiri/sea-turtle-hatchery-pilot/contents/nests.js"; // UPDATE THIS LATER
 
+    // 2. IMMEDIATELY ATTACH CLICK LISTENER TO FLOATING BUTTON
+    if (floatingBtn && adminOverlay) {
+      floatingBtn.style.display = "block";
+      floatingBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        adminOverlay.classList.add("is-open");
+      });
+      document.getElementById("adminClose").addEventListener("click", function() {
+        adminOverlay.classList.remove("is-open");
+      });
+    } else {
+      console.error("Could not find the admin HTML elements. Check index.html.");
+    }
+
+    // 3. LOGIN LOGIC
     var savedToken = localStorage.getItem("gh_token");
-    if (savedToken) {
+    if (savedToken && adminTokenInput) {
       adminTokenInput.value = savedToken;
       showEditor();
     }
 
-    document.getElementById("floatingAdminBtn").addEventListener("click", function() {
-      adminOverlay.classList.add("is-open");
-    });
-    
-    document.getElementById("adminClose").addEventListener("click", function() {
-      adminOverlay.classList.remove("is-open");
-    });
-
-    document.getElementById("adminLoginBtn").addEventListener("click", function() {
-      var token = adminTokenInput.value.trim();
-      if (!token) return alert("Please enter a token.");
-      localStorage.setItem("gh_token", token);
-      showEditor();
-    });
+    if (document.getElementById("adminLoginBtn")) {
+      document.getElementById("adminLoginBtn").addEventListener("click", function() {
+        var token = adminTokenInput.value.trim();
+        if (!token) return alert("Please enter a token.");
+        localStorage.setItem("gh_token", token);
+        showEditor();
+      });
+    }
 
     function showEditor() {
+      if (!adminLoginView || !adminEditorView) return;
       adminLoginView.style.display = "none";
       adminEditorView.style.display = "block";
       
       adminNestSelect.innerHTML = "";
-      // Sort descending so newest nests are at the top of the dropdown
+      // Sort newest first
       allNests.sort((a, b) => b.id.localeCompare(a.id)).forEach(function(nest) {
         var opt = document.createElement("option");
         opt.value = nest.id;
         opt.textContent = nest.id + " - " + nest.species;
         adminNestSelect.appendChild(opt);
       });
+      // Trigger change to populate the first field
+      adminNestSelect.dispatchEvent(new Event('change'));
     }
 
-    // --- Tab Switching Logic ---
-    tabEditBtn.addEventListener("click", function() {
-      tabEditBtn.style.background = "var(--slate-200)"; tabEditBtn.style.color = "var(--slate-900)";
-      tabAddBtn.style.background = "var(--slate-100)"; tabAddBtn.style.color = "var(--slate-500)";
-      formEdit.style.display = "block"; formAdd.style.display = "none";
-      adminModalTitle.textContent = "Update Nest Record";
-      adminStatus.textContent = "";
-    });
+    // 4. TAB SWITCHING
+    if (tabEditBtn && tabAddBtn) {
+      tabEditBtn.addEventListener("click", function() {
+        tabEditBtn.style.background = "var(--slate-200)"; tabEditBtn.style.color = "var(--slate-900)";
+        tabAddBtn.style.background = "var(--slate-100)"; tabAddBtn.style.color = "var(--slate-500)";
+        formEdit.style.display = "block"; formAdd.style.display = "none";
+        adminModalTitle.textContent = "Update Nest Record";
+        adminStatus.textContent = "";
+      });
 
-    tabAddBtn.addEventListener("click", function() {
-      tabAddBtn.style.background = "var(--slate-200)"; tabAddBtn.style.color = "var(--slate-900)";
-      tabEditBtn.style.background = "var(--slate-100)"; tabEditBtn.style.color = "var(--slate-500)";
-      formAdd.style.display = "block"; formEdit.style.display = "none";
-      adminModalTitle.textContent = "Add New Nest";
-      adminStatus.textContent = "";
-    });
+      tabAddBtn.addEventListener("click", function() {
+        tabAddBtn.style.background = "var(--slate-200)"; tabAddBtn.style.color = "var(--slate-900)";
+        tabEditBtn.style.background = "var(--slate-100)"; tabEditBtn.style.color = "var(--slate-500)";
+        formAdd.style.display = "block"; formEdit.style.display = "none";
+        adminModalTitle.textContent = "Add New Nest";
+        adminStatus.textContent = "";
+      });
+    }
 
-    // --- Edit Form Logic ---
-    adminNestSelect.addEventListener("change", function() {
-      var nestId = this.value;
-      var rawNest = nestsData.find(function(n) { return n.id === nestId; });
-      if (!rawNest) return;
-      
-      // Handle date formatting safely for the input field
-      if (rawNest.hatchedDay) {
-        // If it's a valid string like "2026-11-05", it should populate directly
-        adminHatchDate.value = rawNest.hatchedDay;
-      } else {
-        adminHatchDate.value = "";
-      }
-      
-      adminAdopter.value = rawNest.adopter || "";
-      adminStatus.textContent = "";
-    });
+    // 5. EDIT FORM LOGIC
+    if (adminNestSelect) {
+      adminNestSelect.addEventListener("change", function() {
+        var nestId = this.value;
+        var rawNest = nestsData.find(function(n) { return n.id === nestId; });
+        if (!rawNest) return;
+        
+        adminHatchDate.value = rawNest.hatchedDay || "";
+        adminAdopter.value = rawNest.adopter || "";
+        adminStatus.textContent = "";
+      });
+    }
 
-    // --- Helper to push to GitHub ---
+    // 6. GITHUB API PUSH HELPER
     async function pushToGitHub(newContent, commitMessage) {
       var token = localStorage.getItem("gh_token");
       if (!token) throw new Error("No token found.");
       
-      // 1. Get current SHA
       var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + token } });
       if (!getRes.ok) throw new Error("Could not read file. Check token.");
       var fileData = await getRes.json();
       
-      // 2. Push new content
       var putRes = await fetch(repoUrl, {
         method: "PUT",
         headers: { "Authorization": "token " + token, "Content-Type": "application/json" },
@@ -926,85 +932,88 @@
       if (!putRes.ok) throw new Error("Failed to save. Check token permissions.");
     }
 
-    // --- Save Edit (Update) ---
-    document.getElementById("adminSaveBtn").addEventListener("click", async function() {
-      var nestId = adminNestSelect.value;
-      var newHatch = adminHatchDate.value || null;
-      var newAdopter = adminAdopter.value.trim() || null;
-      
-      this.disabled = true;
-      adminStatus.textContent = "Updating GitHub...";
-      adminStatus.style.color = "var(--slate-700)";
-      
-      try {
-        var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
-        var fileData = await getRes.json();
-        var currentContent = atob(fileData.content); 
+    // 7. SAVE EDIT (UPDATE)
+    if (document.getElementById("adminSaveBtn")) {
+      document.getElementById("adminSaveBtn").addEventListener("click", async function() {
+        var nestId = adminNestSelect.value;
+        var newHatch = adminHatchDate.value || null;
+        var newAdopter = adminAdopter.value.trim() || null;
         
-        var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
+        this.disabled = true;
+        adminStatus.textContent = "Updating GitHub...";
+        adminStatus.style.color = "var(--slate-700)";
         
-        var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
-          var hatchString = newHatch ? '"' + newHatch + '"' : 'null';
-          var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
-          return p1 + hatchString + p3 + adopterString;
-        });
-        
-        if (newContent === currentContent) throw new Error("No changes made.");
-        
-        await pushToGitHub(newContent, "Admin update: " + nestId);
-        
-        adminStatus.textContent = "✅ Updated! GitHub Pages is deploying. Please wait 15 seconds...";
-        adminStatus.style.color = "var(--emerald-600)";
-        
-        // Wait 15 seconds so you can't accidentally overwrite the file while GitHub is updating
-        setTimeout(function() { window.location.reload(); }, 15000);
+        try {
+          var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
+          var fileData = await getRes.json();
+          var currentContent = atob(fileData.content); 
+          
+          var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
+          
+          var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
+            var hatchString = newHatch ? '"' + newHatch + '"' : 'null';
+            var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
+            return p1 + hatchString + p3 + adopterString;
+          });
+          
+          if (newContent === currentContent) throw new Error("No changes made.");
+          
+          await pushToGitHub(newContent, "Admin update: " + nestId);
+          
+          adminStatus.textContent = "✅ Updated! GitHub Pages is deploying. Please wait 15 seconds...";
+          adminStatus.style.color = "var(--emerald-600)";
+          
+          setTimeout(function() { window.location.reload(); }, 15000);
 
-      } catch (err) {
-        adminStatus.textContent = "❌ Error: " + err.message;
-        adminStatus.style.color = "red";
-        this.disabled = false;
-      }
-    });
+        } catch (err) {
+          adminStatus.textContent = "❌ Error: " + err.message;
+          adminStatus.style.color = "red";
+          this.disabled = false;
+        }
+      });
+    }
 
-    // --- Add New (Create) ---
-    document.getElementById("adminAddBtn").addEventListener("click", async function() {
-      var newId = addNestId.value.trim();
-      var newSpecies = addSpecies.value;
-      var newEggs = addEggCount.value;
-      var newLayDate = addLayDate.value;
-      var newAdopterName = addAdopter.value.trim();
-      
-      if (!newId || !newEggs || !newLayDate) {
-        return alert("Please fill in Nest ID, Egg Count, and Lay Date.");
-      }
-      
-      this.disabled = true;
-      adminStatus.textContent = "Publishing to GitHub...";
-      adminStatus.style.color = "var(--slate-700)";
-      
-      try {
-        var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
-        var fileData = await getRes.json();
-        var currentContent = atob(fileData.content); 
+    // 8. ADD NEW (CREATE)
+    if (document.getElementById("adminAddBtn")) {
+      document.getElementById("adminAddBtn").addEventListener("click", async function() {
+        var newId = addNestId.value.trim();
+        var newSpecies = addSpecies.value;
+        var newEggs = addEggCount.value;
+        var newLayDate = addLayDate.value;
+        var newAdopterName = addAdopter.value.trim();
         
-        // Build the new formatted text block
-        var adopterString = newAdopterName ? '"' + newAdopterName + '"' : 'null';
-        var newEntry = `  {\n    id: "${newId}",\n    year: 2026,\n    species: ${newSpecies},\n    layDate: "${newLayDate}",\n    eggCount: ${newEggs},\n    hatchedDay: null,\n    adopter: ${adopterString}\n  },\n`;
+        if (!newId || !newEggs || !newLayDate) {
+          return alert("Please fill in Nest ID, Egg Count, and Lay Date.");
+        }
         
-        // Insert it right after the opening bracket: "const nestsData = [\n"
-        var newContent = currentContent.replace("const nestsData = [\n", "const nestsData = [\n" + newEntry);
+        this.disabled = true;
+        adminStatus.textContent = "Publishing to GitHub...";
+        adminStatus.style.color = "var(--slate-700)";
         
-        await pushToGitHub(newContent, "Admin added: " + newId);
-        
-        adminStatus.textContent = "✅ Added! GitHub Pages is deploying. Please wait 15 seconds...";
-        adminStatus.style.color = "var(--emerald-600)";
-        
-        setTimeout(function() { window.location.reload(); }, 15000);
+        try {
+          var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
+          var fileData = await getRes.json();
+          var currentContent = atob(fileData.content); 
+          
+          var adopterString = newAdopterName ? '"' + newAdopterName + '"' : 'null';
+          var newEntry = `  {\n    id: "${newId}",\n    year: 2026,\n    species: ${newSpecies},\n    layDate: "${newLayDate}",\n    eggCount: ${newEggs},\n    hatchedDay: null,\n    adopter: ${adopterString}\n  },\n`;
+          
+          var newContent = currentContent.replace("const nestsData = [\n", "const nestsData = [\n" + newEntry);
+          
+          await pushToGitHub(newContent, "Admin added: " + newId);
+          
+          adminStatus.textContent = "✅ Added! GitHub Pages is deploying. Please wait 15 seconds...";
+          adminStatus.style.color = "var(--emerald-600)";
+          
+          setTimeout(function() { window.location.reload(); }, 15000);
 
-      } catch (err) {
-        adminStatus.textContent = "❌ Error: " + err.message;
-        adminStatus.style.color = "red";
-        this.disabled = false;
-      }
-    });
+        } catch (err) {
+          adminStatus.textContent = "❌ Error: " + err.message;
+          adminStatus.style.color = "red";
+          this.disabled = false;
+        }
+      });
+    }
   }
+
+})(); // <-- This is the very last line of the file. Make sure it's there!
