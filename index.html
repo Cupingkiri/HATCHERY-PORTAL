@@ -137,14 +137,17 @@
        ============================================================ -->
   <footer class="site-footer">
     <p>
-      Data is updated regularly by Reef Guardian hatchery staff.<br />
+      Data is updated regularly by Reef Guardian.<br />
       Please comply with all hatchery guidelines
     </p>
-    <p class="site-footer__small">© <span id="footerYear">2026</span> Reef Guardian, Lankayan Island <br /> © Fazree · All Rights Reserved</p>
+    <p class="site-footer__small">© <span id="footerYear">2026</span> Reef Guardian, Lankayan Island <br /> Vibecoded & Developed by © Fazree · All Rights Reserved</p>
   </footer>
 
   <!-- ============================================================
        NEST DETAIL MODAL
+       ============================================================ -->
+  <!-- ============================================================
+       NEST DETAIL MODAL (Guest View)
        ============================================================ -->
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
     <div class="modal" id="nestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -172,6 +175,102 @@
       </p>
     </div>
   </div>
+
+  <!-- ============================================================
+       ADMIN EDITOR (Hidden unless ?admin=true is in the URL)
+       ============================================================ -->
+  <div class="modal-overlay" id="adminOverlay" aria-hidden="true">
+    <div class="modal" style="max-width: 600px;">
+      <button type="button" class="modal__close" id="adminClose" aria-label="Close editor">✕</button>
+      
+      <header class="modal__header">
+        <p class="modal__eyebrow" style="color: #f59e0b;">Staff Access</p>
+        <h2 class="modal__title" id="adminModalTitle">Update Nest Record</h2>
+      </header>
+
+      <div class="modal__body">
+        <!-- Token Login Screen -->
+        <div id="adminLoginView">
+          <p style="font-size: 0.9rem; margin-bottom: 12px; color: var(--slate-700);">
+            Enter your GitHub Personal Access Token to unlock editing.
+          </p>
+          <input type="password" id="adminTokenInput" class="input" placeholder="ghp_..." style="margin-bottom: 12px;">
+          <button type="button" class="btn btn--ghost" id="adminLoginBtn" style="width: 100%; background: var(--emerald-700); color: white; border: none;">Unlock Editor</button>
+        </div>
+
+        <!-- Editor Screen -->
+        <div id="adminEditorView" style="display: none;">
+          
+          <!-- Tab Toggle -->
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <button type="button" id="tabEditBtn" class="btn" style="flex: 1; background: var(--slate-200); color: var(--slate-900); border: none; padding: 8px;">Edit Existing</button>
+            <button type="button" id="tabAddBtn" class="btn" style="flex: 1; background: var(--slate-100); color: var(--slate-500); border: none; padding: 8px;">Add New</button>
+          </div>
+
+          <!-- EDIT EXISTING FORM -->
+          <div id="formEdit">
+            <div class="field" style="margin-bottom: 12px;">
+              <label class="sr-only">Select Nest</label>
+              <select id="adminNestSelect" class="select"></select>
+            </div>
+            
+            <div class="field" style="margin-bottom: 12px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Hatch Date (YYYY-MM-DD or leave blank)</label>
+              <input type="date" id="adminHatchDate" class="input">
+            </div>
+
+            <div class="field" style="margin-bottom: 20px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Adopter Name (leave blank if available)</label>
+              <input type="text" id="adminAdopter" class="input" placeholder="e.g. John Doe">
+            </div>
+
+            <button type="button" class="btn" id="adminSaveBtn" style="width: 100%; background: var(--emerald-600); color: white; border: none;">Save Changes to GitHub</button>
+          </div>
+
+          <!-- ADD NEW FORM -->
+          <div id="formAdd" style="display: none;">
+            <div class="field" style="margin-bottom: 12px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">New Nest ID</label>
+              <input type="text" id="addNestId" class="input" placeholder="e.g. Nest #395">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+              <div class="field" style="flex: 1;">
+                <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Species</label>
+                <select id="addSpecies" class="select">
+                  <option value="1">1 = Green Turtle</option>
+                  <option value="2">2 = Hawksbill</option>
+                </select>
+              </div>
+              <div class="field" style="flex: 1;">
+                <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Egg Count</label>
+                <input type="number" id="addEggCount" class="input" placeholder="e.g. 105">
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom: 12px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Lay Date (YYYY-MM-DD)</label>
+              <input type="date" id="addLayDate" class="input">
+            </div>
+
+            <div class="field" style="margin-bottom: 20px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--slate-500);">Adopter Name (Optional)</label>
+              <input type="text" id="addAdopter" class="input" placeholder="Leave blank if available">
+            </div>
+
+            <button type="button" class="btn" id="adminAddBtn" style="width: 100%; background: var(--emerald-600); color: white; border: none;">Publish New Nest to GitHub</button>
+          </div>
+
+          <p id="adminStatus" style="font-size: 0.8rem; text-align: center; margin-top: 10px; font-weight: bold;"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Admin Button (Only shows in admin mode) -->
+  <button id="floatingAdminBtn" class="btn" style="display:none; position: fixed; bottom: 20px; right: 20px; z-index: 90; background: #f59e0b; color: white; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border-radius: 50px; padding: 12px 24px; font-weight: bold;">
+    ✏️ Edit Data
+  </button>
 
   <!-- ============================================================
        SCRIPTS  (order matters: data first, then logic)

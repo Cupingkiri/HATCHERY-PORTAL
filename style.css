@@ -968,3 +968,11 @@ button {
     flex: 0 0 auto;
   }
 }
+/* Admin inputs */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+}
+input[type="date"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}

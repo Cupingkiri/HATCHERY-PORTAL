@@ -796,3 +796,197 @@
     init();
   }
 })();
+  /* -----------------------------------------------------------
+     14. ADMIN EDITOR (GITHUB API INTEGRATION)
+     ----------------------------------------------------------- */
+     
+  var isAdminMode = window.location.search.includes("admin=true");
+  
+  if (isAdminMode) {
+    document.getElementById("floatingAdminBtn").style.display = "block";
+    
+    var adminOverlay = document.getElementById("adminOverlay");
+    var adminLoginView = document.getElementById("adminLoginView");
+    var adminEditorView = document.getElementById("adminEditorView");
+    var adminTokenInput = document.getElementById("adminTokenInput");
+    
+    // Tabs
+    var tabEditBtn = document.getElementById("tabEditBtn");
+    var tabAddBtn = document.getElementById("tabAddBtn");
+    var formEdit = document.getElementById("formEdit");
+    var formAdd = document.getElementById("formAdd");
+    var adminModalTitle = document.getElementById("adminModalTitle");
+
+    // Edit Form Elements
+    var adminNestSelect = document.getElementById("adminNestSelect");
+    var adminHatchDate = document.getElementById("adminHatchDate");
+    var adminAdopter = document.getElementById("adminAdopter");
+    
+    // Add Form Elements
+    var addNestId = document.getElementById("addNestId");
+    var addSpecies = document.getElementById("addSpecies");
+    var addEggCount = document.getElementById("addEggCount");
+    var addLayDate = document.getElementById("addLayDate");
+    var addAdopter = document.getElementById("addAdopter");
+    
+    var adminStatus = document.getElementById("adminStatus");
+    var repoUrl = "https://api.github.com/repos/Cupingkiri/sea-turtle-hatchery-pilot/contents/nests.js"; // UPDATE THIS URL LATER
+
+    var savedToken = localStorage.getItem("gh_token");
+    if (savedToken) {
+      adminTokenInput.value = savedToken;
+      showEditor();
+    }
+
+    document.getElementById("floatingAdminBtn").addEventListener("click", function() {
+      adminOverlay.classList.add("is-open");
+    });
+    
+    document.getElementById("adminClose").addEventListener("click", function() {
+      adminOverlay.classList.remove("is-open");
+    });
+
+    document.getElementById("adminLoginBtn").addEventListener("click", function() {
+      var token = adminTokenInput.value.trim();
+      if (!token) return alert("Please enter a token.");
+      localStorage.setItem("gh_token", token);
+      showEditor();
+    });
+
+    function showEditor() {
+      adminLoginView.style.display = "none";
+      adminEditorView.style.display = "block";
+      
+      adminNestSelect.innerHTML = "";
+      allNests.forEach(function(nest) {
+        var opt = document.createElement("option");
+        opt.value = nest.id;
+        opt.textContent = nest.id + " - " + nest.species;
+        adminNestSelect.appendChild(opt);
+      });
+    }
+
+    // --- Tab Switching Logic ---
+    tabEditBtn.addEventListener("click", function() {
+      tabEditBtn.style.background = "var(--slate-200)"; tabEditBtn.style.color = "var(--slate-900)";
+      tabAddBtn.style.background = "var(--slate-100)"; tabAddBtn.style.color = "var(--slate-500)";
+      formEdit.style.display = "block"; formAdd.style.display = "none";
+      adminModalTitle.textContent = "Update Nest Record";
+    });
+
+    tabAddBtn.addEventListener("click", function() {
+      tabAddBtn.style.background = "var(--slate-200)"; tabAddBtn.style.color = "var(--slate-900)";
+      tabEditBtn.style.background = "var(--slate-100)"; tabEditBtn.style.color = "var(--slate-500)";
+      formAdd.style.display = "block"; formEdit.style.display = "none";
+      adminModalTitle.textContent = "Add New Nest";
+    });
+
+    // --- Edit Form Logic ---
+    adminNestSelect.addEventListener("change", function() {
+      var nestId = this.value;
+      var rawNest = nestsData.find(function(n) { return n.id === nestId; });
+      if (!rawNest) return;
+      adminHatchDate.value = rawNest.hatchedDay || "";
+      adminAdopter.value = rawNest.adopter || "";
+      adminStatus.textContent = "";
+    });
+
+    // --- Helper to push to GitHub ---
+    async function pushToGitHub(newContent, commitMessage) {
+      var token = localStorage.getItem("gh_token");
+      if (!token) throw new Error("No token found.");
+      
+      // 1. Get current SHA
+      var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + token } });
+      if (!getRes.ok) throw new Error("Could not read file. Check token.");
+      var fileData = await getRes.json();
+      
+      // 2. Push new content
+      var putRes = await fetch(repoUrl, {
+        method: "PUT",
+        headers: { "Authorization": "token " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: commitMessage,
+          content: btoa(newContent), 
+          sha: fileData.sha
+        })
+      });
+      
+      if (!putRes.ok) throw new Error("Failed to save. Check token permissions.");
+    }
+
+    // --- Save Edit (Update) ---
+    document.getElementById("adminSaveBtn").addEventListener("click", async function() {
+      var nestId = adminNestSelect.value;
+      var newHatch = adminHatchDate.value || null;
+      var newAdopter = adminAdopter.value.trim() || null;
+      
+      adminStatus.textContent = "Updating GitHub...";
+      adminStatus.style.color = "var(--slate-700)";
+      
+      try {
+        var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
+        var fileData = await getRes.json();
+        var currentContent = atob(fileData.content); 
+        
+        var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
+        
+        var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
+          var hatchString = newHatch ? '"' + newHatch + '"' : 'null';
+          var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
+          return p1 + hatchString + p3 + adopterString;
+        });
+        
+        if (newContent === currentContent) throw new Error("No changes made.");
+        
+        await pushToGitHub(newContent, "Admin update: " + nestId);
+        
+        adminStatus.textContent = "✅ Updated! Refreshing in 3s...";
+        adminStatus.style.color = "var(--emerald-600)";
+        setTimeout(function() { window.location.reload(); }, 3000);
+
+      } catch (err) {
+        adminStatus.textContent = "❌ Error: " + err.message;
+        adminStatus.style.color = "red";
+      }
+    });
+
+    // --- Add New (Create) ---
+    document.getElementById("adminAddBtn").addEventListener("click", async function() {
+      var newId = addNestId.value.trim();
+      var newSpecies = addSpecies.value;
+      var newEggs = addEggCount.value;
+      var newLayDate = addLayDate.value;
+      var newAdopterName = addAdopter.value.trim();
+      
+      if (!newId || !newEggs || !newLayDate) {
+        return alert("Please fill in Nest ID, Egg Count, and Lay Date.");
+      }
+      
+      adminStatus.textContent = "Publishing to GitHub...";
+      adminStatus.style.color = "var(--slate-700)";
+      
+      try {
+        var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
+        var fileData = await getRes.json();
+        var currentContent = atob(fileData.content); 
+        
+        // Build the new formatted text block
+        var adopterString = newAdopterName ? '"' + newAdopterName + '"' : 'null';
+        var newEntry = `  {\n    id: "${newId}",\n    year: 2026,\n    species: ${newSpecies},\n    layDate: "${newLayDate}",\n    eggCount: ${newEggs},\n    hatchedDay: null,\n    adopter: ${adopterString}\n  },\n`;
+        
+        // Insert it right after the opening bracket: "const nestsData = [\n"
+        var newContent = currentContent.replace("const nestsData = [\n", "const nestsData = [\n" + newEntry);
+        
+        await pushToGitHub(newContent, "Admin added: " + newId);
+        
+        adminStatus.textContent = "✅ Added! Refreshing in 3s...";
+        adminStatus.style.color = "var(--emerald-600)";
+        setTimeout(function() { window.location.reload(); }, 3000);
+
+      } catch (err) {
+        adminStatus.textContent = "❌ Error: " + err.message;
+        adminStatus.style.color = "red";
+      }
+    });
+  }
