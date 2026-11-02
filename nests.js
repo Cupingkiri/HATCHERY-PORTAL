@@ -121,952 +121,17 @@
    ============================================================= */
 
 const nestsData = [
-  {
-    id: "Nest #394",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-30",
-    eggCount: 97,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #393",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-30",
-    eggCount: 82,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #392",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-29",
-    eggCount: 96,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #391",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-28",
-    eggCount: 58,
-    hatchedDay: null,         // still incubating
-    adopter: "Viktoria Lantrat & Sergei Plotnikov"
-  },
-  {
-    id: "Nest #390",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-27",
-    eggCount: 81,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #389",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-26",
-    eggCount: 98,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #388",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-25",
-    eggCount: 44,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #387",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-09-26",
-    eggCount: 129,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #386",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-23",
-    eggCount: 67,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #385",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-22",
-    eggCount: 105,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #384",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-22",
-    eggCount: 102,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #383",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-22",
-    eggCount: 74,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #382",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-09-21",
-    eggCount: 144,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #381",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-21",
-    eggCount: 68,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-{
-    id: "Nest #380",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-20",
-    eggCount: 97,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-{
-    id: "Nest #379",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-17",
-    eggCount: 80,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-{
-    id: "Nest #378",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-17",
-    eggCount: 61,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-{
-    id: "Nest #377",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-15",
-    eggCount: 131,
-    hatchedDay: null,         // still incubating
-    adopter: "Lyyn"
-  },
-  {
-    id: "Nest #376",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-15",
-    eggCount: 37,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #375",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-12",
-    eggCount: 100,
-    hatchedDay: null,         // still incubating
-    adopter: "Jocelyn Morris & Scott Morris"
-  },
-  {
-    id: "Nest #374",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-09-12",
-    eggCount: 147,
-    hatchedDay: null,         // still incubating
-    adopter: "Michelle Wong"
-  },
-  {
-    id: "Nest #373",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-12",
-    eggCount: 121,
-    hatchedDay: null,         // still incubating
-    adopter: "Charlotte Wiggins"
-  },
-  {
-    id: "Nest #372",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-12",
-    eggCount: 95,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #371",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-11",
-    eggCount: 117,
-    hatchedDay: null,         // still incubating
-    adopter: "Michelle Cates"
-  },
-  {
-    id: "Nest #370",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-11",
-    eggCount: 51,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #369",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-9",
-    eggCount: 85,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #368",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-9",
-    eggCount: 117,
-    hatchedDay: null,         // still incubating
-    adopter: "David Todd"
-  },
-  {
-    id: "Nest #367",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-9",
-    eggCount: 114,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #366",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-9",
-    eggCount: 101,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #365",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-9",
-    eggCount: 95,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #364",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-9",
-    eggCount: 127,
-    hatchedDay: null,         // still incubating
-    adopter: "Michael Cates"
-  },
-  {
-    id: "Nest #363",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-8",
-    eggCount: 81,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #362",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-8",
-    eggCount: 63,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #361",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-8",
-    eggCount: 38,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #360",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-6",
-    eggCount: 98,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #359",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-6",
-    eggCount: 54,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #358",
-    year: 2026,
-    species: 2,               // 2 = hawksbill Turtle
-    layDate: "2026-09-4",
-    eggCount: 111,
-    hatchedDay: null,         // still incubating
-    adopter: "Dania Sigrist"
-  },
-  {
-    id: "Nest #357",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-3",
-    eggCount: 94,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #356",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-3",
-    eggCount: 86,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #355",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 106,
-    hatchedDay: "2026-10-21",         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #354",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 89,
-    hatchedDay: null,         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #353",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 72,
-    hatchedDay: "2026-10-24",         // still incubating
-    adopter: "Ulli & Julia"
-  },
-  {
-    id: "Nest #352",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 73,
-    hatchedDay: "2026-10-24",         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #351",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 57,
-    hatchedDay: "2026-10-24",         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #350",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 85,
-    hatchedDay: "2026-10-22",         // still incubating
-    adopter: null
-  },
-  {
-    id: "Nest #349",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-09-1",
-    eggCount: 87,
-    hatchedDay: "2026-10-22",         // still incubating
-    adopter: null
-  },
-    {
-    id: "Nest #348",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-31",
-    eggCount: 106,
-    hatchedDay: "2026-10-21",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #347",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-30",
-    eggCount: 108,
-    hatchedDay: "2026-10-21",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #346",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-30",
-    eggCount: 81,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #345",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-30",
-    eggCount: 136,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: "Dania Sigrist"
-  },
-   {
-    id: "Nest #344",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-30",
-    eggCount: 63,
-    hatchedDay: "2026-10-21",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #343",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-08-29",
-    eggCount: 141,
-    hatchedDay: "2026-10-23",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #342",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-08-29",
-    eggCount: 126,
-    hatchedDay: "2026-10-24",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #341",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-29",
-    eggCount: 168,
-    hatchedDay: "2026-10-21",         // still incubating
-    adopter: "Dania Sigrist"
-  },
-   {
-    id: "Nest #340",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-29",
-    eggCount: 65,
-    hatchedDay: "2026-10-20",         // still incubating
-    adopter: "Gavin & Marian"
-  },
-   {
-    id: "Nest #339",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-29",
-    eggCount: 107,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: "Jennifer Clarewatton"
-  },
-   {
-    id: "Nest #338",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-29",
-    eggCount: 77,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #337",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-28",
-    eggCount: 95,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: "Flynn & Freddie"
-  },
-   {
-    id: "Nest #336",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-28",
-    eggCount: 65,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #335",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-08-28",
-    eggCount: 136,
-    hatchedDay: "2026-10-20",         // still incubating
-    adopter: "Mirjam Knies"
-  },
-   {
-    id: "Nest #334",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-27",
-    eggCount: 105,
-    hatchedDay: "2026-10-18",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #333",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-23",
-    eggCount: 108,
-    hatchedDay: "2026-10-17",         // still incubating
-    adopter: "Viola Bianchi"
-  },
- {
-    id: "Nest #332",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-23",
-    eggCount: 56,
-    hatchedDay: "2026-10-19",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #331",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-23",
-    eggCount: 79,
-    hatchedDay: "2026-10-16",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #330",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-21",
-    eggCount: 111,
-    hatchedDay: "2026-10-10",         // still incubating
-    adopter: "Gueldenpfennig"
-  },
-   {
-    id: "Nest #329",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-20",
-    eggCount: 89,
-    hatchedDay: "2026-10-10",         // still incubating
-    adopter: "Yu Ching Ho"
-  },
-   {
-    id: "Nest #328",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-20",
-    eggCount: 134,
-    hatchedDay: "2026-10-10",         // still incubating
-    adopter: "Raye"
-  },
-   {
-    id: "Nest #327",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-20",
-    eggCount: 114,
-    hatchedDay: "2026-10-15",         // still incubating
-    adopter: "Amanda Teoh"
-  },
-   {
-    id: "Nest #326",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-18",
-    eggCount: 62,
-    hatchedDay: "2026-10-10",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #325",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-18",
-    eggCount: 71,
-    hatchedDay: "2026-10-10",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #324",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-17",
-    eggCount: 65,
-    hatchedDay: "2026-10-8",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #323",
-    year: 2026,
-    species: 2,               // 2 = hawksbill Turtle
-    layDate: "2026-08-16",
-    eggCount: 182,
-    hatchedDay: "2026-10-8",         // still incubating
-    adopter: "Nico & James"
-  },
-   {
-    id: "Nest #322",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-15",
-    eggCount: 101,
-    hatchedDay: "2026-10-6",         // still incubating
-    adopter: "Tina Loevdal"
-  },
-   {
-    id: "Nest #321",
-    year: 2026,
-    species: 2,               // 2 = hawksbill Turtle
-    layDate: "2026-08-14",
-    eggCount: 157,
-    hatchedDay: "2026-10-16",         // still incubating
-    adopter: "Belford Tan"
-  },
-   {
-    id: "Nest #320",
-    year: 2026,
-    species: 2,               // 2 = hawksbill Turtle
-    layDate: "2026-08-14",
-    eggCount: 134,
-    hatchedDay: "2026-10-6",         // still incubating
-    adopter: "Lieveke Van Bezouw"
-  },
-   {
-    id: "Nest #319",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-13",
-    eggCount: 88,
-    hatchedDay: "2026-10-3",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #318",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-13",
-    eggCount: 57,
-    hatchedDay: "2026-10-7",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #317",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-13",
-    eggCount: 78,
-    hatchedDay: "2026-10-3",         // still incubating
-    adopter: "Lisia Orsini"
-  },
-   {
-    id: "Nest #316",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 99,
-    hatchedDay: "2026-10-3",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #315",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 100,
-    hatchedDay: "2026-10-1",         // still incubating
-    adopter: "Sonja Szameit"
-  },
-   {
-    id: "Nest #314",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 110,
-    hatchedDay: null,         // still incubating
-    adopter: "Elena Guala'"
-  },
-   {
-    id: "Nest #313",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 94,
-    hatchedDay: "2026-10-8",         // still incubating
-    adopter: "Sarah Devlin"
-  },
-   {
-    id: "Nest #312",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 81,
-    hatchedDay: "2026-10-5",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #311",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 64,
-    hatchedDay: "2026-10-6",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #310",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-12",
-    eggCount: 127,
-    hatchedDay: "2026-10-01",         // still incubating
-    adopter: "Mirjam Glattli"
-  },
-   {
-    id: "Nest #309",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-11",
-    eggCount: 55,
-    hatchedDay: "2026-10-6",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #308",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-11",
-    eggCount: 75,
-    hatchedDay: "2026-10-01",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #307",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-08-11",
-    eggCount: 93,
-    hatchedDay: "2026-10-01",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #306",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-10",
-    eggCount: 54,
-    hatchedDay: "2026-10-3",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #305",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-10",
-    eggCount: 88,
-    hatchedDay: "2026-09-28",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #304",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-9",
-    eggCount: 56,
-    hatchedDay: "2026-10-2",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #303",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-8",
-    eggCount: 96,
-    hatchedDay: "2026-09-28",         // still incubating
-    adopter: null
-  },
-   {
-    id: "Nest #302",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-8",
-    eggCount: 84,
-    hatchedDay: "2026-09-28",         // still incubating
-    adopter: null
-  },
- {
-    id: "Nest #301",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-8",
-    eggCount: 88,
-    hatchedDay: "2026-09-29",         // still incubating
-    adopter: "Harecker Walter"
-  },
-   {
-    id: "Nest #300",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-08-7",
-    eggCount: 123,
-    hatchedDay: "2026-09-29",         // still incubating
-    adopter: "Elvira Kerchkoffs"
-  },
-    {
-    id: "Nest #01",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-01-03",
-    eggCount: 103,
-    hatchedDay: "2026-03-12",
-    adopter: null
-  },
-  {
-    id: "Nest #02",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-06",
-    eggCount: 110,
-    hatchedDay: "2026-03-08",
-    adopter: null
-  },
-  {
-    id: "Nest #03",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-07",
-    eggCount: 84,
-    hatchedDay: "2026-03-12",
-    adopter: null
-  },
-  {
-    id: "Nest #04",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-15",
-    eggCount: 87,
-    hatchedDay: "2026-03-19",
-    adopter: null
-  },
-  {
-    id: "Nest #05",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-01-15",
-    eggCount: 92,
-    hatchedDay: "2026-03-24",
-    adopter: null
-  },
-  {
-    id: "Nest #06",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-18",
-    eggCount: 105,
-    hatchedDay: "2026-03-17",
-    adopter: null
-  },
-  {
-    id: "Nest #07",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-17",
-    eggCount: 132,
-    hatchedDay: "2026-03-20",
-    adopter: null
-  },
-  {
-    id: "Nest #08",
-    year: 2026,
-    species: 2,               // 2 = Hawksbill Turtle
-    layDate: "2026-01-19",
-    eggCount: 82,
-    hatchedDay: "2026-03-27",
-    adopter: null
-  },
-  {
-    id: "Nest #09",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-22",
-    eggCount: 66,
-    hatchedDay: "2026-03-25",
-    adopter: null
-  },
-  {
-    id: "Nest #10",
-    year: 2026,
-    species: 1,               // 1 = Green Turtle
-    layDate: "2026-01-24",
-    eggCount: 139,
-    hatchedDay: "2026-03-24",
-    adopter: null
-  },
-  { id: "Nest #11", year: 2026, species: 1, layDate: "2026-01-26", eggCount: 70, hatchedDay: "2026-03-27", adopter: null },
+{ id: "Nest #01", year: 2026, species: 2, layDate: "2026-01-03", eggCount: 103, hatchedDay: "2026-03-12", adopter: null },
+{ id: "Nest #02", year: 2026, species: 1, layDate: "2026-01-06", eggCount: 110, hatchedDay: "2026-03-08", adopter: null },
+{ id: "Nest #03", year: 2026, species: 1, layDate: "2026-01-07", eggCount: 84, hatchedDay: "2026-03-12", adopter: null },
+{ id: "Nest #04", year: 2026, species: 1, layDate: "2026-01-15", eggCount: 87, hatchedDay: "2026-03-19", adopter: null },
+{ id: "Nest #05", year: 2026, species: 2, layDate: "2026-01-15", eggCount: 92, hatchedDay: "2026-03-24", adopter: null },
+{ id: "Nest #06", year: 2026, species: 1, layDate: "2026-01-18", eggCount: 105, hatchedDay: "2026-03-17", adopter: null },
+{ id: "Nest #07", year: 2026, species: 1, layDate: "2026-01-17", eggCount: 132, hatchedDay: "2026-03-20", adopter: null },
+{ id: "Nest #08", year: 2026, species: 2, layDate: "2026-01-19", eggCount: 82, hatchedDay: "2026-03-27", adopter: null },
+{ id: "Nest #09", year: 2026, species: 1, layDate: "2026-01-22", eggCount: 66, hatchedDay: "2026-03-25", adopter: null },
+{ id: "Nest #10", year: 2026, species: 1, layDate: "2026-01-24", eggCount: 139, hatchedDay: "2026-03-24", adopter: null },
+{ id: "Nest #11", year: 2026, species: 1, layDate: "2026-01-26", eggCount: 70, hatchedDay: "2026-03-27", adopter: null },
 { id: "Nest #12", year: 2026, species: 1, layDate: "2026-01-26", eggCount: 74, hatchedDay: "2026-03-28", adopter: null },
 { id: "Nest #13", year: 2026, species: 1, layDate: "2026-01-26", eggCount: 99, hatchedDay: "2026-03-26", adopter: null },
 { id: "Nest #14", year: 2026, species: 1, layDate: "2026-01-27", eggCount: 116, hatchedDay: "2026-03-29", adopter: null },
@@ -1355,4 +420,124 @@ const nestsData = [
 { id: "Nest #297", year: 2026, species: 1, layDate: "2026-08-05", eggCount: 130, hatchedDay: "2026-09-25", adopter: "Jerome Keryell" },
 { id: "Nest #298", year: 2026, species: 2, layDate: "2026-08-05", eggCount: 110, hatchedDay: "2026-09-27", adopter: "Van Splunder" },
 { id: "Nest #299", year: 2026, species: 1, layDate: "2026-08-07", eggCount: 85, hatchedDay: "2026-09-28", adopter: null },
+{ id: "Nest #300", year: 2026, species: 1, layDate: "2026-08-07", eggCount: 123, hatchedDay: "2026-09-29", adopter: "Elvira Kerchkoffs" },
+{ id: "Nest #301", year: 2026, species: 1, layDate: "2026-08-08", eggCount: 88, hatchedDay: "2026-09-29", adopter: "Harecker Walter" },
+{ id: "Nest #302", year: 2026, species: 1, layDate: "2026-08-08", eggCount: 84, hatchedDay: "2026-09-28", adopter: null },
+{ id: "Nest #303", year: 2026, species: 1, layDate: "2026-08-08", eggCount: 96, hatchedDay: "2026-09-28", adopter: null },
+{ id: "Nest #304", year: 2026, species: 1, layDate: "2026-08-09", eggCount: 56, hatchedDay: "2026-10-02", adopter: null },
+{ id: "Nest #305", year: 2026, species: 1, layDate: "2026-08-10", eggCount: 88, hatchedDay: "2026-09-28", adopter: null },
+{ id: "Nest #306", year: 2026, species: 1, layDate: "2026-08-10", eggCount: 54, hatchedDay: "2026-10-03", adopter: null },
+{ id: "Nest #307", year: 2026, species: 2, layDate: "2026-08-11", eggCount: 93, hatchedDay: "2026-10-01", adopter: null },
+{ id: "Nest #308", year: 2026, species: 1, layDate: "2026-08-11", eggCount: 75, hatchedDay: "2026-10-01", adopter: null },
+{ id: "Nest #309", year: 2026, species: 1, layDate: "2026-08-11", eggCount: 55, hatchedDay: "2026-10-06", adopter: null },
+{ id: "Nest #310", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 127, hatchedDay: "2026-10-01", adopter: "Mirjam Glattli" },
+{ id: "Nest #311", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 64, hatchedDay: "2026-10-06", adopter: null },
+{ id: "Nest #312", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 81, hatchedDay: "2026-10-05", adopter: null },
+{ id: "Nest #313", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 94, hatchedDay: "2026-10-08", adopter: "Sarah Devlin" },
+{ id: "Nest #314", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 110, hatchedDay: "2026-10-08", adopter: "Elena Guala'" },
+{ id: "Nest #315", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 100, hatchedDay: "2026-10-01", adopter: "Sonja Szameit" },
+{ id: "Nest #316", year: 2026, species: 1, layDate: "2026-08-12", eggCount: 99, hatchedDay: "2026-10-03", adopter: null },
+{ id: "Nest #317", year: 2026, species: 1, layDate: "2026-08-13", eggCount: 78, hatchedDay: "2026-10-03", adopter: "Lisia Orsini" },
+{ id: "Nest #318", year: 2026, species: 1, layDate: "2026-08-13", eggCount: 57, hatchedDay: "2026-10-07", adopter: null },
+{ id: "Nest #319", year: 2026, species: 1, layDate: "2026-08-13", eggCount: 88, hatchedDay: "2026-10-03", adopter: null },
+{ id: "Nest #320", year: 2026, species: 2, layDate: "2026-08-14", eggCount: 134, hatchedDay: "2026-10-06", adopter: "Lieveke Van Bezouw" },
+{ id: "Nest #321", year: 2026, species: 2, layDate: "2026-08-14", eggCount: 157, hatchedDay: "2026-10-16", adopter: "Belford Tan" },
+{ id: "Nest #322", year: 2026, species: 1, layDate: "2026-08-15", eggCount: 101, hatchedDay: "2026-10-06", adopter: "Tina Loevdal" },
+{ id: "Nest #323", year: 2026, species: 2, layDate: "2026-08-16", eggCount: 182, hatchedDay: "2026-10-08", adopter: "Nico & James" },
+{ id: "Nest #324", year: 2026, species: 1, layDate: "2026-08-17", eggCount: 65, hatchedDay: "2026-10-08", adopter: null },
+{ id: "Nest #325", year: 2026, species: 1, layDate: "2026-08-18", eggCount: 71, hatchedDay: "2026-10-10", adopter: null },
+{ id: "Nest #326", year: 2026, species: 1, layDate: "2026-08-18", eggCount: 62, hatchedDay: "2026-10-10", adopter: null },
+{ id: "Nest #327", year: 2026, species: 1, layDate: "2026-08-20", eggCount: 114, hatchedDay: "2026-10-15", adopter: "Amanda Teoh" },
+{ id: "Nest #328", year: 2026, species: 1, layDate: "2026-08-20", eggCount: 134, hatchedDay: "2026-10-10", adopter: "Raye" },
+{ id: "Nest #329", year: 2026, species: 1, layDate: "2026-08-20", eggCount: 89, hatchedDay: "2026-10-10", adopter: "Yu Ching Ho" },
+{ id: "Nest #330", year: 2026, species: 1, layDate: "2026-08-21", eggCount: 111, hatchedDay: "2026-10-10", adopter: "Gueldenpfennig" },
+{ id: "Nest #331", year: 2026, species: 1, layDate: "2026-08-23", eggCount: 79, hatchedDay: "2026-10-16", adopter: null },
+{ id: "Nest #332", year: 2026, species: 1, layDate: "2026-08-23", eggCount: 56, hatchedDay: "2026-10-19", adopter: null },
+{ id: "Nest #333", year: 2026, species: 1, layDate: "2026-08-23", eggCount: 108, hatchedDay: "2026-10-17", adopter: "Viola Bianchi" },
+{ id: "Nest #334", year: 2026, species: 1, layDate: "2026-08-27", eggCount: 105, hatchedDay: "2026-10-18", adopter: null },
+{ id: "Nest #335", year: 2026, species: 2, layDate: "2026-08-28", eggCount: 136, hatchedDay: "2026-10-20", adopter: "Mirjam Knies" },
+{ id: "Nest #336", year: 2026, species: 1, layDate: "2026-08-28", eggCount: 65, hatchedDay: "2026-10-19", adopter: null },
+{ id: "Nest #337", year: 2026, species: 1, layDate: "2026-08-28", eggCount: 95, hatchedDay: "2026-10-19", adopter: "Flynn & Freddie" },
+{ id: "Nest #338", year: 2026, species: 1, layDate: "2026-08-29", eggCount: 77, hatchedDay: "2026-10-19", adopter: null },
+{ id: "Nest #339", year: 2026, species: 1, layDate: "2026-08-29", eggCount: 107, hatchedDay: "2026-10-19", adopter: "Jennifer Clarewatton" },
+{ id: "Nest #340", year: 2026, species: 1, layDate: "2026-08-29", eggCount: 65, hatchedDay: "2026-10-20", adopter: "Gavin & Marian" },
+{ id: "Nest #341", year: 2026, species: 1, layDate: "2026-08-29", eggCount: 168, hatchedDay: "2026-10-21", adopter: "Dania Sigrist" },
+{ id: "Nest #342", year: 2026, species: 2, layDate: "2026-08-29", eggCount: 126, hatchedDay: "2026-10-24", adopter: null },
+{ id: "Nest #343", year: 2026, species: 2, layDate: "2026-08-29", eggCount: 141, hatchedDay: "2026-10-23", adopter: null },
+{ id: "Nest #344", year: 2026, species: 1, layDate: "2026-08-30", eggCount: 63, hatchedDay: "2026-10-21", adopter: null },
+{ id: "Nest #345", year: 2026, species: 1, layDate: "2026-08-30", eggCount: 136, hatchedDay: "2026-10-19", adopter: "Dania Sigrist" },
+{ id: "Nest #346", year: 2026, species: 1, layDate: "2026-08-30", eggCount: 81, hatchedDay: "2026-10-19", adopter: null },
+{ id: "Nest #347", year: 2026, species: 1, layDate: "2026-08-30", eggCount: 108, hatchedDay: "2026-10-21", adopter: null },
+{ id: "Nest #348", year: 2026, species: 1, layDate: "2026-08-31", eggCount: 106, hatchedDay: "2026-10-21", adopter: null },
+{ id: "Nest #349", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 87, hatchedDay: "2026-10-22", adopter: null },
+{ id: "Nest #350", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 85, hatchedDay: "2026-10-22", adopter: null },
+{ id: "Nest #351", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 57, hatchedDay: "2026-10-24", adopter: null },
+{ id: "Nest #352", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 73, hatchedDay: "2026-10-24", adopter: null },
+{ id: "Nest #353", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 72, hatchedDay: "2026-10-24", adopter: "Ulli & Julia" },
+{ id: "Nest #354", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 89, hatchedDay: "2026-10-24", adopter: null },
+{ id: "Nest #355", year: 2026, species: 1, layDate: "2026-09-01", eggCount: 106, hatchedDay: "2026-10-21", adopter: null },
+{ id: "Nest #356", year: 2026, species: 1, layDate: "2026-09-03", eggCount: 86, hatchedDay: "2026-10-27", adopter: null },
+{ id: "Nest #357", year: 2026, species: 1, layDate: "2026-09-03", eggCount: 94, hatchedDay: "2026-10-30", adopter: null },
+{ id: "Nest #358", year: 2026, species: 2, layDate: "2026-09-04", eggCount: 111, hatchedDay: "2026-11-02", adopter: "Dania Sigrist" },
+{ id: "Nest #359", year: 2026, species: 1, layDate: "2026-09-06", eggCount: 54, hatchedDay: null, adopter: null },
+{ id: "Nest #360", year: 2026, species: 1, layDate: "2026-09-06", eggCount: 98, hatchedDay: "2026-10-30", adopter: null },
+{ id: "Nest #361", year: 2026, species: 1, layDate: "2026-09-08", eggCount: 38, hatchedDay: null, adopter: null },
+{ id: "Nest #362", year: 2026, species: 1, layDate: "2026-09-08", eggCount: 63, hatchedDay: null, adopter: null },
+{ id: "Nest #363", year: 2026, species: 1, layDate: "2026-09-08", eggCount: 81, hatchedDay: null, adopter: null },
+{ id: "Nest #364", year: 2026, species: 1, layDate: "2026-09-09", eggCount: 127, hatchedDay: "2026-10-31", adopter: "Michael Cates" },
+{ id: "Nest #365", year: 2026, species: 1, layDate: "2026-09-09", eggCount: 95, hatchedDay: "2026-11-01", adopter: null },
+{ id: "Nest #366", year: 2026, species: 1, layDate: "2026-09-09", eggCount: 101, hatchedDay: null, adopter: null },
+{ id: "Nest #367", year: 2026, species: 1, layDate: "2026-09-09", eggCount: 114, hatchedDay: null, adopter: null },
+{ id: "Nest #368", year: 2026, species: 1, layDate: "2026-09-09", eggCount: 117, hatchedDay: null, adopter: "David Todd" },
+{ id: "Nest #369", year: 2026, species: 1, layDate: "2026-09-09", eggCount: 85, hatchedDay: null, adopter: null },
+{ id: "Nest #370", year: 2026, species: 1, layDate: "2026-09-11", eggCount: 51, hatchedDay: null, adopter: null },
+{ id: "Nest #371", year: 2026, species: 1, layDate: "2026-09-11", eggCount: 117, hatchedDay: null, adopter: "Michelle Cates" },
+{ id: "Nest #372", year: 2026, species: 1, layDate: "2026-09-12", eggCount: 95, hatchedDay: null, adopter: null },
+{ id: "Nest #373", year: 2026, species: 1, layDate: "2026-09-12", eggCount: 121, hatchedDay: null, adopter: "Charlotte Wiggins" },
+{ id: "Nest #374", year: 2026, species: 2, layDate: "2026-09-12", eggCount: 147, hatchedDay: null, adopter: "Michelle Wong" },
+{ id: "Nest #375", year: 2026, species: 1, layDate: "2026-09-12", eggCount: 100, hatchedDay: null, adopter: "Jocelyn Morris & Scott Morris" },
+{ id: "Nest #376", year: 2026, species: 1, layDate: "2026-09-15", eggCount: 37, hatchedDay: null, adopter: null },
+{ id: "Nest #377", year: 2026, species: 1, layDate: "2026-09-15", eggCount: 131, hatchedDay: null, adopter: "Lyyn" },
+{ id: "Nest #378", year: 2026, species: 1, layDate: "2026-09-17", eggCount: 61, hatchedDay: null, adopter: null },
+{ id: "Nest #379", year: 2026, species: 1, layDate: "2026-09-17", eggCount: 80, hatchedDay: null, adopter: null },
+{ id: "Nest #380", year: 2026, species: 1, layDate: "2026-09-20", eggCount: 97, hatchedDay: null, adopter: null },
+{ id: "Nest #381", year: 2026, species: 1, layDate: "2026-09-21", eggCount: 68, hatchedDay: null, adopter: null },
+{ id: "Nest #382", year: 2026, species: 2, layDate: "2026-09-21", eggCount: 144, hatchedDay: null, adopter: "Anabel.C" },
+{ id: "Nest #383", year: 2026, species: 1, layDate: "2026-09-22", eggCount: 74, hatchedDay: null, adopter: null },
+{ id: "Nest #384", year: 2026, species: 1, layDate: "2026-09-22", eggCount: 102, hatchedDay: null, adopter: null },
+{ id: "Nest #385", year: 2026, species: 1, layDate: "2026-09-22", eggCount: 105, hatchedDay: null, adopter: null },
+{ id: "Nest #386", year: 2026, species: 1, layDate: "2026-09-23", eggCount: 67, hatchedDay: null, adopter: null },
+{ id: "Nest #387", year: 2026, species: 2, layDate: "2026-09-26", eggCount: 129, hatchedDay: null, adopter: null },
+{ id: "Nest #388", year: 2026, species: 1, layDate: "2026-09-25", eggCount: 44, hatchedDay: null, adopter: null },
+{ id: "Nest #389", year: 2026, species: 1, layDate: "2026-09-26", eggCount: 98, hatchedDay: null, adopter: null },
+{ id: "Nest #390", year: 2026, species: 1, layDate: "2026-09-27", eggCount: 81, hatchedDay: null, adopter: null },
+{ id: "Nest #391", year: 2026, species: 1, layDate: "2026-09-28", eggCount: 58, hatchedDay: null, adopter: "Viktoria Lantrat & Sergei Plotnikov" },
+{ id: "Nest #392", year: 2026, species: 1, layDate: "2026-09-29", eggCount: 96, hatchedDay: null, adopter: null },
+{ id: "Nest #393", year: 2026, species: 1, layDate: "2026-09-30", eggCount: 82, hatchedDay: null, adopter: null },
+{ id: "Nest #394", year: 2026, species: 1, layDate: "2026-09-30", eggCount: 97, hatchedDay: null, adopter: null },
+{ id: "Nest #395", year: 2026, species: 1, layDate: "2026-10-02", eggCount: 90, hatchedDay: null, adopter: null },
+{ id: "Nest #396", year: 2026, species: 2, layDate: "2026-10-02", eggCount: 128, hatchedDay: null, adopter: "Sara Oliveira" },
+{ id: "Nest #397", year: 2026, species: 1, layDate: "2026-10-03", eggCount: 96, hatchedDay: null, adopter: null },
+{ id: "Nest #398", year: 2026, species: 1, layDate: "2026-10-05", eggCount: 29, hatchedDay: null, adopter: null },
+{ id: "Nest #399", year: 2026, species: 1, layDate: "2026-10-05", eggCount: 68, hatchedDay: null, adopter: null },
+{ id: "Nest #400", year: 2026, species: 1, layDate: "2026-10-06", eggCount: 101, hatchedDay: null, adopter: "Marcel Calvitto" },
+{ id: "Nest #401", year: 2026, species: 1, layDate: "2026-10-08", eggCount: 55, hatchedDay: null, adopter: null },
+{ id: "Nest #402", year: 2026, species: 1, layDate: "2026-10-09", eggCount: 40, hatchedDay: null, adopter: null },
+{ id: "Nest #403", year: 2026, species: 1, layDate: "2026-10-10", eggCount: 115, hatchedDay: null, adopter: null },
+{ id: "Nest #404", year: 2026, species: 1, layDate: "2026-10-11", eggCount: 75, hatchedDay: null, adopter: null },
+{ id: "Nest #405", year: 2026, species: 2, layDate: "2026-10-11", eggCount: 134, hatchedDay: null, adopter: "Thomas & Stephanie" },
+{ id: "Nest #406", year: 2026, species: 1, layDate: "2026-10-11", eggCount: 103, hatchedDay: null, adopter: null },
+{ id: "Nest #407", year: 2026, species: 1, layDate: "2026-10-15", eggCount: 79, hatchedDay: null, adopter: null },
+{ id: "Nest #408", year: 2026, species: 1, layDate: "2026-10-15", eggCount: 99, hatchedDay: null, adopter: null },
+{ id: "Nest #409", year: 2026, species: 1, layDate: "2026-10-17", eggCount: 59, hatchedDay: null, adopter: null },
+{ id: "Nest #410", year: 2026, species: 1, layDate: "2026-10-18", eggCount: 122, hatchedDay: null, adopter: null },
+{ id: "Nest #411", year: 2026, species: 1, layDate: "2026-10-18", eggCount: 78, hatchedDay: null, adopter: null },
+{ id: "Nest #412", year: 2026, species: 1, layDate: "2026-10-19", eggCount: 133, hatchedDay: null, adopter: null },
+{ id: "Nest #413", year: 2026, species: 1, layDate: "2026-10-22", eggCount: 88, hatchedDay: null, adopter: null },
+{ id: "Nest #414", year: 2026, species: 1, layDate: "2026-10-25", eggCount: 73, hatchedDay: null, adopter: "Anabel.C" },
+{ id: "Nest #415", year: 2026, species: 1, layDate: "2026-10-25", eggCount: 100, hatchedDay: null, adopter: "Matthew Murray" },
+{ id: "Nest #416", year: 2026, species: 1, layDate: "2026-10-26", eggCount: 57, hatchedDay: null, adopter: null },
+{ id: "Nest #417", year: 2026, species: 1, layDate: "2026-10-26", eggCount: 24, hatchedDay: null, adopter: null },
+{ id: "Nest #418", year: 2026, species: 1, layDate: "2026-10-28", eggCount: 99, hatchedDay: null, adopter: "Fairy & James" },
+{ id: "Nest #419", year: 2026, species: 1, layDate: "2026-10-29", eggCount: 95, hatchedDay: null, adopter: null },
 ];
