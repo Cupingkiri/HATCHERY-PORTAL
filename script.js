@@ -815,9 +815,53 @@
   } else {
     init();
   }
+  /* -----------------------------------------------------------
+     14. UI INTERACTIONS (Coral Button & Scroll to Top)
+     ----------------------------------------------------------- */
+
+  // --- Coral Widget Logic ---
+  var coralWidget = document.getElementById("coralWidget");
+  var coralBtn = document.getElementById("coralBtn");
+  
+  if (coralBtn && coralWidget) {
+    coralBtn.addEventListener("click", function(e) {
+      e.stopPropagation(); // Prevents click from immediately closing it
+      coralWidget.classList.toggle("is-open");
+    });
+
+    // Close the card if clicking anywhere else on the screen
+    document.addEventListener("click", function(e) {
+      if (!coralWidget.contains(e.target) && coralWidget.classList.contains("is-open")) {
+        coralWidget.classList.remove("is-open");
+      }
+    });
+  }
+
+  // --- Scroll to Top Logic ---
+  var scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  if (scrollTopBtn) {
+    // Listen to scrolling to show/hide the button
+    window.addEventListener("scroll", function() {
+      // If user scrolls down more than 300px, show the button
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add("is-visible");
+      } else {
+        scrollTopBtn.classList.remove("is-visible");
+      }
+    });
+
+    // Scroll back to top when clicked
+    scrollTopBtn.addEventListener("click", function() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
 
   /* -----------------------------------------------------------
-     14. ADMIN EDITOR (GITHUB API INTEGRATION)
+     15. ADMIN EDITOR (GITHUB API INTEGRATION)
      ----------------------------------------------------------- */
      
   var isAdminMode = window.location.search.includes("admin=true");

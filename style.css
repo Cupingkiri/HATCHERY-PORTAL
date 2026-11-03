@@ -1084,3 +1084,177 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 .nest-card[data-status="Hatched"] {
   border-left-color: var(--hatched-accent);
 }
+/* =============================================================
+   NEW UI FEATURES
+   ============================================================= */
+
+/* --- 1. Footer Socials --- */
+.footer-socials {
+  margin: 20px 0;
+  padding-top: 20px;
+  border-top: 1px solid #e0eeea;
+}
+
+.footer-socials__title {
+  font-weight: 750;
+  color: var(--slate-700);
+  margin-bottom: 15px !important;
+}
+
+.footer-socials__icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.footer-socials__icons a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--emerald-700);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-socials__icons a:hover {
+  transform: translateY(-3px);
+  color: var(--teal-500);
+}
+
+.footer-socials__icons svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- 2. Coral Widget (Floating Button & Card) --- */
+.coral-widget {
+  position: fixed;
+  bottom: calc(90px + env(safe-area-inset-bottom, 0px)); /* Sits above scroll button */
+  right: 20px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.coral-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-size: 28px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.coral-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.coral-card {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  width: 260px;
+  margin-bottom: 12px;
+  border: 1px solid #e6f0ec;
+  text-align: left;
+  font-size: 0.9rem;
+  
+  /* Hidden state */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transform-origin: bottom right;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* When active, slide it up */
+.coral-widget.is-open .coral-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* --- 3. Scroll to Top Button --- */
+.scroll-top-btn {
+  position: fixed;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--emerald-700);
+  color: var(--white);
+  border: none;
+  box-shadow: 0 4px 12px rgba(4, 38, 32, 0.4);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 900;
+  
+  /* Hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.scroll-top-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--emerald-600);
+  transform: translateX(-50%) translateY(-3px);
+}
+
+.scroll-top-btn svg {
+  width: 20px;
+  height: 20px;
+}
+/* --- Footer Icon Size Upgrades --- */
+.footer-socials__icons a {
+  width: 60px;  /* Increased from 44px */
+  height: 60px; /* Increased from 44px */
+}
+
+.footer-socials__icons svg {
+  width: 30px;  /* Increased from 20px */
+  height: 30px;
+}
+
+/* --- Footer Credits --- */
+.footer-credits {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This forces the text to center */
+  gap: 6px;
+  text-align: center;  /* This ensures if a line wraps, the wrapped text stays centered */
+}
+
+.footer-credits__main {
+  font-size: 0.85rem !important;
+  color: var(--slate-500) !important;
+  margin: 0 !important;
+  font-weight: 600;
+}
+
+.footer-credits__dev {
+  font-size: 0.72rem !important;
+  color: #94a3b8 !important;
+  margin: 0 !important;
+  letter-spacing: 0.02em;
+}
