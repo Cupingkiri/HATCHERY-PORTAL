@@ -1258,3 +1258,17 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
   margin: 0 !important;
   letter-spacing: 0.02em;
 }
+/* Ensure the footer sits above background layers */
+.site-footer {
+  position: relative;
+  z-index: 10;
+  padding-bottom: 100px !important; /* Adds empty space at the bottom so floating buttons don't block the icons */
+}
+
+/* Force the links to be clickable and sit on top */
+.footer-socials__icons a {
+  position: relative;
+  z-index: 20;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1); /* Gives visual feedback on mobile tap */
+}
