@@ -215,38 +215,39 @@
    */
   function decorateNest(rawNest) {
     var layDate = parseISODate(rawNest.layDate);
-
-    /* Days since laying (never negative). */
     var elapsed = daysBetween(layDate, today());
     if (elapsed < 0) elapsed = 0;
 
-    /* --- Hatch date handling (Rule 1) ------------------------ */
     var hatchDate = parseHatchDate(rawNest.hatchedDay);
     var hasHatched = hatchDate !== null;
-
-    /* Exact incubation day the nest hatched, calculated as the
-       difference between layDate and the recorded hatch date. */
     var hatchedDayNumber = null;
     if (hasHatched) {
       hatchedDayNumber = daysBetween(layDate, hatchDate);
-      if (hatchedDayNumber < 0) hatchedDayNumber = 0; // guard bad data
+      if (hatchedDayNumber < 0) hatchedDayNumber = 0;
     }
 
     var speciesInfo = getSpeciesInfo(rawNest.species);
 
+    // Extract the display ID (e.g., "2026-Nest #01" becomes "Nest #01")
+    // If it's an old format without a year, it keeps it as is.
+    var displayId = rawNest.id;
+    if (rawNest.id.includes("-")) {
+      displayId = rawNest.id.split("-")[1];
+    }
+
     return {
-      id: rawNest.id,
+      id: rawNest.id,                   // Keep the unique ID for the system
+      displayId: displayId,             // Use this for the cards and search
       year: rawNest.year,
-      species: speciesInfo.common,      // display name for cards / search
-      _speciesCode: rawNest.species,    // raw numeric code for the modal
+      species: speciesInfo.common,
+      _speciesCode: rawNest.species,
       eggCount: rawNest.eggCount,
       adopter: rawNest.adopter || null,
 
-      /* --- live, auto-calculated fields --- */
       _layDate: layDate,
       _days: elapsed,
-      _hatchDate: hatchDate,            // Date object or null
-      _hatchedDay: hatchedDayNumber,    // calculated number or null
+      _hatchDate: hatchDate,
+      _hatchedDay: hatchedDayNumber,
       _status: resolveStatus(hasHatched, elapsed),
       _windowStart: addDays(layDate, EXPECTING_SOON_START_DAY),
       _windowEnd: addDays(layDate, NOMINAL_WINDOW_END_DAY)
@@ -399,16 +400,31 @@
       'data-nest-id="' + escapeHtml(nest.id) + '" ' +
       'data-status="' + escapeHtml(nest._status) + '" ' +
       'tabindex="0" role="button" ' +
-      'aria-label="' + escapeHtml(nest.id) + ", " + escapeHtml(nest.species) +
+      'aria-label="' + escapeHtml(nest.displayId) + ", " + escapeHtml(nest.species) +
       ", " + escapeHtml(nest._status) + ". Tap for details." + '">' +
 
         '<div class="nest-card__top">' +
-          '<h3 class="nest-card__id">' + escapeHtml(nest.id) + "</h3>" +
-          '<span class="badge ' + statusClass(nest._status) + '">' +
-            escapeHtml(nest._status) +
-          "</span>" +
+          '<h3 class="nest-card__id">' + escapeHtml(nest.displayId) + "</h3>" +
+          
+          '<div class="nest-card__status-block">' +
+            '<span class="badge ' + statusClass(nest._status) + '">' +
+              escapeHtml(nest._status) +
+            "</span>" +
+            // Show eggs if not hatched, show turtles if hatched
+            (nest._status === "Hatched" 
+              ? '<div class="egg-tray hatchling-tray">' +
+                  '<div class="egg-row"><span class="hatchling">🐢</span></div>' +
+                '</div>'
+              : '<div class="egg-tray">' +
+                  '<div class="egg-row"><span class="egg"></span></div>' +
+                  '<div class="egg-row"><span class="egg"></span><span class="egg"></span></div>' +
+                '</div>'
+            ) +
+          '</div>' +
+          
         "</div>" +
 
+        // The Species text now has its own line below
         '<p class="nest-card__species">' + escapeHtml(nest.species) + "</p>" +
 
         '<div class="nest-card__meta">' +
@@ -472,17 +488,18 @@
    * make zero-padded IDs searchable as "Nest #1" or "nest 1".
    */
   function matchesQuery(nest, normalizedQuery) {
-    var digits = String(nest.id).replace(/\D/g, ""); // "01"
-    var numeric = digits ? String(Number(digits)) : ""; // "1"
+    // Use displayId (e.g. "Nest #01") instead of the full system ID
+    var digits = String(nest.displayId).replace(/\D/g, ""); 
+    var numeric = digits ? String(Number(digits)) : "";
 
     var tokens = [
-      nest.id,                        // "Nest #01"
+      nest.displayId,                 // "Nest #01"
       digits,                         // "01"
       numeric,                        // "1"
       "nest " + numeric,              // "nest 1"
-      nest.adopter || "",             // "John Doe"
-      nest.species || "",             // "Green Turtle"
-      String(nest.year)               // "2026"
+      nest.adopter || "",             
+      nest.species || "",             
+      String(nest.year)               
     ];
 
     for (var i = 0; i < tokens.length; i++) {
@@ -823,6 +840,7 @@
     var adminModalTitle = document.getElementById("adminModalTitle");
 
     var adminNestSelect = document.getElementById("adminNestSelect");
+    var adminYearFilter = document.getElementById("adminYearFilter");
     var adminHatchDate = document.getElementById("adminHatchDate");
     var adminAdopter = document.getElementById("adminAdopter");
     
@@ -864,24 +882,70 @@
       });
     }
 
-    function showEditor() {
-      if (!adminLoginView || !adminEditorView) return;
+      function showEditor() {
       adminLoginView.style.display = "none";
       adminEditorView.style.display = "block";
       
-      adminNestSelect.innerHTML = "";
-      // Sort newest first
-      allNests.sort((a, b) => b.id.localeCompare(a.id)).forEach(function(nest) {
-        var opt = document.createElement("option");
-        opt.value = nest.id;
-        opt.textContent = nest.id + " - " + nest.species;
-        adminNestSelect.appendChild(opt);
+      // 1. Populate the Year Filter Dropdown
+      var uniqueYears = [];
+      allNests.forEach(function(nest) {
+        if (!uniqueYears.includes(nest.year)) uniqueYears.push(nest.year);
       });
-      // Trigger change to populate the first field
-      adminNestSelect.dispatchEvent(new Event('change'));
+      
+      // Sort years descending
+      uniqueYears.sort((a, b) => b - a); 
+      
+      adminYearFilter.innerHTML = '<option value="all">All Years</option>';
+      uniqueYears.forEach(function(yr) {
+        var opt = document.createElement("option");
+        opt.value = yr;
+        opt.textContent = yr;
+        adminYearFilter.appendChild(opt);
+      });
+
+      // 2. Trigger the nest list population
+      populateAdminNestList();
     }
 
-    // 4. TAB SWITCHING
+    // 3. New function to populate the Nest list based on the Year filter
+    function populateAdminNestList() {
+      var selectedYear = adminYearFilter.value;
+      adminNestSelect.innerHTML = "";
+      
+      // Filter the nests
+      var filteredNests = allNests.filter(function(nest) {
+        if (selectedYear === "all") return true;
+        return String(nest.year) === selectedYear;
+      });
+      
+      // Sort strictly by numerical Nest number
+      filteredNests.sort(function(a, b) {
+        var numA = parseInt(a.displayId.replace(/\D/g, ''), 10) || 0;
+        var numB = parseInt(b.displayId.replace(/\D/g, ''), 10) || 0;
+        return numA - numB; // Ascending order (1, 2, 3...)
+      });
+
+      // Populate the dropdown
+      if (filteredNests.length === 0) {
+        var opt = document.createElement("option");
+        opt.textContent = "No nests found for this year";
+        adminNestSelect.appendChild(opt);
+        adminHatchDate.value = "";
+        adminAdopter.value = "";
+      } else {
+        filteredNests.forEach(function(nest) {
+          var opt = document.createElement("option");
+          opt.value = nest.id; // The hidden system ID (e.g., "2026-Nest #01")
+          opt.textContent = nest.displayId; // The clean ID (e.g., "Nest #01")
+          adminNestSelect.appendChild(opt);
+        });
+        
+        // Trigger change to fill the form with the first nest
+        adminNestSelect.dispatchEvent(new Event('change'));
+      }
+    }
+
+    // 4a. TAB SWITCHING
     if (tabEditBtn && tabAddBtn) {
       tabEditBtn.addEventListener("click", function() {
         tabEditBtn.style.background = "var(--slate-200)"; tabEditBtn.style.color = "var(--slate-900)";
@@ -897,6 +961,13 @@
         formAdd.style.display = "block"; formEdit.style.display = "none";
         adminModalTitle.textContent = "Add New Nest";
         adminStatus.textContent = "";
+      });
+    }
+
+    // 4b. Listen for changes on the Year Filter
+    if (adminYearFilter) {
+      adminYearFilter.addEventListener("change", function() {
+        populateAdminNestList();
       });
     }
 
@@ -976,17 +1047,34 @@
       });
     }
 
-    // 8. ADD NEW (CREATE)
+     // 8. ADD NEW (CREATE)
     if (document.getElementById("adminAddBtn")) {
       document.getElementById("adminAddBtn").addEventListener("click", async function() {
-        var newId = addNestId.value.trim();
+        var rawId = addNestId.value.trim();
+        var yearValue = document.getElementById("addYear").value.trim();
         var newSpecies = addSpecies.value;
         var newEggs = addEggCount.value;
         var newLayDate = addLayDate.value;
         var newAdopterName = addAdopter.value.trim();
         
-        if (!newId || !newEggs || !newLayDate) {
-          return alert("Please fill in Nest ID, Egg Count, and Lay Date.");
+        if (!rawId || !yearValue || !newEggs || !newLayDate) {
+          return alert("Please fill in Nest ID, Year, Egg Count, and Lay Date.");
+        }
+
+        // Format the ID nicely: pad with zero if needed (e.g., "5" becomes "Nest #05")
+        var paddedId = rawId.toString().padStart(2, '0');
+        var finalId = yearValue + "-Nest #" + paddedId;
+        
+        // Check for duplicates across the entire dataset
+        var isDuplicate = allNests.some(function(nest) {
+          return nest.id.toLowerCase() === finalId.toLowerCase();
+        });
+
+        if (isDuplicate) {
+          alert("❌ Error: " + finalId + " already exists in the database!\n\nPlease check the existing nests and try a different number or year.");
+          adminStatus.textContent = "❌ Error: " + finalId + " already exists.";
+          adminStatus.style.color = "red";
+          return; 
         }
         
         this.disabled = true;
@@ -999,11 +1087,13 @@
           var currentContent = atob(fileData.content); 
           
           var adopterString = newAdopterName ? '"' + newAdopterName + '"' : 'null';
-          var newEntry = `  {\n    id: "${newId}",\n    year: 2026,\n    species: ${newSpecies},\n    layDate: "${newLayDate}",\n    eggCount: ${newEggs},\n    hatchedDay: null,\n    adopter: ${adopterString}\n  },\n`;
+          
+          // We build the new entry using the generated ID
+          var newEntry = `  { id: "${finalId}", year: ${yearValue}, species: ${newSpecies}, layDate: "${newLayDate}", eggCount: ${newEggs}, hatchedDay: null, adopter: ${adopterString} },\n`;
           
           var newContent = currentContent.replace("const nestsData = [\n", "const nestsData = [\n" + newEntry);
           
-          await pushToGitHub(newContent, "Admin added: " + newId);
+          await pushToGitHub(newContent, "Admin added: " + finalId);
           
           adminStatus.textContent = "✅ Added! GitHub Pages is deploying. Please wait 15 seconds...";
           adminStatus.style.color = "var(--emerald-600)";

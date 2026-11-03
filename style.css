@@ -170,6 +170,10 @@ button {
   gap: 16px;
 }
 
+.brand a:active {
+  opacity: 0.8;
+}
+
 /* --- LEFT SIDE: logo + titles -------------------------------- */
 .brand {
   display: flex;
@@ -979,4 +983,104 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 /* Ensure Admin Editor sits above the Guest Modal */
 #adminOverlay {
   z-index: 200 !important;
+}
+/* =============================================================
+   FUN VISUAL EFFECTS (Eggs, Glow, Shaking, Themes)
+   ============================================================= */
+
+/* --- 1. The Eggs & Status Block --- */
+.nest-card__status-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+  gap: 6px;
+}
+
+.nest-card__species {
+  margin: 6px 0 0 0 !important; 
+}
+
+.egg-tray {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-right: 8px; 
+}
+
+.egg-row {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+}
+
+.egg {
+  width: 15px;
+  height: 17px;
+  background-color: #F0EAD6;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25), inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #a09982;
+}
+
+/* --- 2. INCUBATING: The "Internal Oven" Glow --- */
+.nest-card[data-status="Incubating"] {
+  /* Increased duration to 4s to give it more time to hold and rest */
+  animation: incubate-internal-glow 4s infinite ease-in-out;
+}
+
+@keyframes incubate-internal-glow {
+  /* Start dim */
+  0% { box-shadow: var(--shadow-sm), inset 0 0 0px #f59f0b60(245, 158, 11, 0); }
+  
+  /* Glow on */
+  20% { box-shadow: var(--shadow-sm), inset 0 0 20px #f59f0bc7; }
+  
+  /* Hold the glow from 20% to 60% of the animation (0.8s to 2.4s) */
+  60% { box-shadow: var(--shadow-sm), inset 0 0 20px #f59f0bc7; }
+  
+  /* Fade out */
+  100% { box-shadow: var(--shadow-sm), inset 0 0 0px #f59f0b60(245, 158, 11, 0); }
+}
+
+/* --- 3. EXPECTING SOON: The Shake --- */
+.nest-card[data-status="Expecting Soon"] .egg {
+  animation: egg-shake 0.4s infinite ease-in-out;
+}
+
+.nest-card[data-status="Expecting Soon"] .egg-row:nth-child(1) .egg { animation-delay: 0s; }
+.nest-card[data-status="Expecting Soon"] .egg-row:nth-child(2) .egg:nth-child(1) { animation-delay: 0.1s; }
+.nest-card[data-status="Expecting Soon"] .egg-row:nth-child(2) .egg:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes egg-shake {
+  0% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-1px) rotate(-3deg); }
+  50% { transform: translateX(1px) rotate(3deg); }
+  75% { transform: translateX(-1px) rotate(-2deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+/* --- 4. HATCHED: Baby Turtle & Wiggle --- */
+.hatchling-tray {
+  margin-top: 2px;
+  margin-right: 10px;
+}
+
+.hatchling {
+  font-size: 50px; /* Made slightly larger since there's only one now */
+  line-height: 0.5;
+  display: inline-block; 
+  animation: turtle-wiggle 0.4s ease-in-out infinite alternate;
+}
+
+/* The Wiggle Keyframes */
+@keyframes turtle-wiggle {
+  0% { transform: rotate(-10deg) translateY(0); }
+  50% { transform: rotate(5deg) translateY(-1px); }
+  100% { transform: rotate(10deg) translateY(0); }
+}
+
+/* Restore the standard left stripe color for Hatched cards */
+.nest-card[data-status="Hatched"] {
+  border-left-color: var(--hatched-accent);
 }
