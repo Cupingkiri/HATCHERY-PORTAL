@@ -1108,25 +1108,37 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 }
 
 .footer-socials__icons a {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
+  /* Flex centers the icon perfectly inside the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--white);
   color: var(--emerald-700);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.footer-socials__icons a:hover {
-  transform: translateY(-3px);
-  color: var(--teal-500);
+  
+  /* THE MOBILE FIXES: */
+  touch-action: manipulation; /* Forces instant tap recognition */
+  -webkit-tap-highlight-color: transparent; /* Stops the ugly blue flash on mobile */
+  cursor: pointer;
 }
 
 .footer-socials__icons svg {
-  width: 20px;
-  height: 20px;
+  width: 26px;
+  height: 26px;
+  /* This tells the phone: "Don't click the graphic, click the circle behind it" */
+  pointer-events: none; 
+}
+
+/* ONLY do the hover jump on devices with a mouse */
+@media (hover: hover) {
+  .footer-socials__icons a:hover {
+    transform: translateY(-3px);
+    color: var(--teal-500);
+  }
 }
 
 /* --- 2. Coral Widget (Floating Button & Card) --- */
