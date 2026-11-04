@@ -824,17 +824,29 @@
   var coralBtn = document.getElementById("coralBtn");
   
   if (coralBtn && coralWidget) {
+    // 1. Open/Close when clicking the button
     coralBtn.addEventListener("click", function(e) {
-      e.stopPropagation(); // Prevents click from immediately closing it
+      e.preventDefault();
+      e.stopPropagation(); // Stops the page from thinking we clicked elsewhere
       coralWidget.classList.toggle("is-open");
     });
 
-    // Close the card if clicking anywhere else on the screen
+    // 2. Close if clicking anywhere else on the screen
     document.addEventListener("click", function(e) {
-      if (!coralWidget.contains(e.target) && coralWidget.classList.contains("is-open")) {
-        coralWidget.classList.remove("is-open");
+      if (coralWidget.classList.contains("is-open")) {
+        if (!coralWidget.contains(e.target)) {
+          coralWidget.classList.remove("is-open");
+        }
       }
     });
+
+    // 3. Close automatically if they click the Instagram link inside the card
+    var coralLink = coralWidget.querySelector('a');
+    if (coralLink) {
+      coralLink.addEventListener("click", function() {
+        coralWidget.classList.remove("is-open");
+      });
+    }
   }
 
   // --- Scroll to Top Logic ---

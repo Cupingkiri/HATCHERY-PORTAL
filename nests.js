@@ -1,3 +1,10 @@
+/* 
+  WARNING: This database is the exclusive property of Reef Guardian. 
+  Unauthorized copying, extraction, or use of this data for academic or commercial 
+  purposes is a violation of copyright law. 
+  Original deployment date: [12-November-2026]. 
+*/
+
 /* =============================================================
    nests.js — NEST DATA SOURCE  (SAFE FOR NON-TECHNICAL STAFF)
    =============================================================
