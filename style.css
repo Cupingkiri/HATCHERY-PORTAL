@@ -1305,3 +1305,11 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
     color: var(--emerald-700);
   }
 }
+/* Remove sticky behavior on mobile screens only */
+@media (max-width: 679px) {
+  .controls {
+    position: relative; /* Makes it scroll away with the page */
+    top: auto;
+    z-index: auto;
+  }
+}
