@@ -1308,8 +1308,8 @@ input[type="date"]:hover::-webkit-calendar-picker-indicator {
 /* Remove sticky behavior on mobile screens only */
 @media (max-width: 679px) {
   .controls {
-    position: relative; /* Makes it scroll away with the page */
-    top: auto;
-    z-index: auto;
+    position: static !important; /* Forces the browser to scroll it away normally */
+    top: unset !important;       /* Removes the sticky top anchor */
+    z-index: 1 !important;       /* Drops it below the floating buttons */
   }
 }
