@@ -593,6 +593,8 @@ button {
   text-transform: uppercase;
   white-space: nowrap;
   border-radius: 999px;
+  /* The only change: A soft drop shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.281);
 }
 
 .badge::before {
