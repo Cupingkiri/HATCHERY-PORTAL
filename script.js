@@ -1064,8 +1064,17 @@
 
     // 7. SAVE EDIT (UPDATE)
     if (document.getElementById("adminSaveBtn")) {
-      document.getElementById("adminSaveBtn").addEventListener("click", async function() {
-        var nestId = adminNestSelect.value;
+          document.getElementById("adminSaveBtn").addEventListener("click", async function() {
+      // 1. Remove focus from the dropdown so the browser registers the typed data
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+      
+      // 2. Small delay to let the browser catch up
+      await new Promise(r => setTimeout(r, 100));
+
+      var nestId = adminNestSelect.value;
+      // ... (the rest of your code stays exactly the same) ...
               // Force a string, trim whitespace, and ensure it's formatted
       var rawDate = adminHatchDate.value;
       var newHatch = rawDate ? rawDate.trim() : null;
@@ -1080,21 +1089,21 @@
           var fileData = await getRes.json();
           var currentContent = atob(fileData.content); 
           
-                  var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
-        
-        var match = currentContent.match(nestRegex);
-        console.log("--- DEBUG START ---");
-        console.log("Looking for Nest ID:", nestId);
-        console.log("Did we find the nest block?", match ? "YES" : "NO");
-        if (match) {
-          console.log("Current text in GitHub:", match[0]);
-        }
-        console.log("New Date value from form:", newHatch);
-        console.log("New Adopter value from form:", newAdopter);
+                         // Find the specific nest block
+        var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
         
         var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
-         var hatchString = (newHatch && newHatch !== "") ? '"' + newHatch + '"' : 'null';
-          var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
+          // Format the new hatch date
+          var hatchString = (newHatch && newHatch.trim() !== "") ? '"' + newHatch.trim() + '"' : 'null';
+          
+          // Format the new adopter (Handle empty strings, extra spaces, and quotes)
+          var adopterString = 'null';
+          if (newAdopter && newAdopter.trim() !== "") {
+            // We escape any double quotes the user might have typed in the name
+            var safeAdopter = newAdopter.trim().replace(/"/g, '\\"');
+            adopterString = '"' + safeAdopter + '"';
+          }
+          
           return p1 + hatchString + p3 + adopterString;
         });
         
