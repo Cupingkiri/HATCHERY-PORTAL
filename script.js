@@ -1086,7 +1086,11 @@
             return p1 + hatchString + p3 + adopterString;
           });
           
-          if (newContent === currentContent) throw new Error("No changes made.");
+                 if (newContent === currentContent) {
+          console.log("DEBUG - Original:", currentContent.match(new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")'))[0]);
+          console.log("DEBUG - New Hatch:", newHatch, "New Adopter:", newAdopter);
+          throw new Error("No changes made. Check console for details.");
+        }
           
           await pushToGitHub(newContent, "Admin update: " + nestId);
           
