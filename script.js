@@ -1066,7 +1066,9 @@
     if (document.getElementById("adminSaveBtn")) {
       document.getElementById("adminSaveBtn").addEventListener("click", async function() {
         var nestId = adminNestSelect.value;
-        var newHatch = adminHatchDate.value || null;
+              // Force a string, trim whitespace, and ensure it's formatted
+      var rawDate = adminHatchDate.value;
+      var newHatch = rawDate ? rawDate.trim() : null;
         var newAdopter = adminAdopter.value.trim() || null;
         
         this.disabled = true;
@@ -1091,7 +1093,7 @@
         console.log("New Adopter value from form:", newAdopter);
         
         var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
-          var hatchString = newHatch ? '"' + newHatch + '"' : 'null';
+         var hatchString = (newHatch && newHatch !== "") ? '"' + newHatch + '"' : 'null';
           var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
           return p1 + hatchString + p3 + adopterString;
         });
