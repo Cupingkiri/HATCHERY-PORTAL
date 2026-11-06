@@ -1078,19 +1078,29 @@
           var fileData = await getRes.json();
           var currentContent = atob(fileData.content); 
           
-          var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
-          
-          var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
-            var hatchString = newHatch ? '"' + newHatch + '"' : 'null';
-            var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
-            return p1 + hatchString + p3 + adopterString;
-          });
-          
-                 if (newContent === currentContent) {
-          console.log("DEBUG - Original:", currentContent.match(new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")'))[0]);
-          console.log("DEBUG - New Hatch:", newHatch, "New Adopter:", newAdopter);
-          throw new Error("No changes made. Check console for details.");
+                  var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
+        
+        var match = currentContent.match(nestRegex);
+        console.log("--- DEBUG START ---");
+        console.log("Looking for Nest ID:", nestId);
+        console.log("Did we find the nest block?", match ? "YES" : "NO");
+        if (match) {
+          console.log("Current text in GitHub:", match[0]);
         }
+        console.log("New Date value from form:", newHatch);
+        console.log("New Adopter value from form:", newAdopter);
+        
+        var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
+          var hatchString = newHatch ? '"' + newHatch + '"' : 'null';
+          var adopterString = newAdopter ? '"' + newAdopter + '"' : 'null';
+          return p1 + hatchString + p3 + adopterString;
+        });
+        
+        if (newContent === currentContent) {
+          console.warn("--- BLOCKED: NO CHANGES DETECTED ---");
+          throw new Error("No changes made. Check console for debug info.");
+        }
+        console.log("--- DEBUG END: SUCCESS ---");
           
           await pushToGitHub(newContent, "Admin update: " + nestId);
           
