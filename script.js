@@ -1090,7 +1090,32 @@
           var currentContent = atob(fileData.content); 
           
                          // Find the specific nest block
-        var nestRegex = new RegExp('(id:\\s*"' + nestId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
+                // 1. Extract just the "Nest #01" part (ignore the year prefix for matching)
+        var cleanId = nestId.includes("-") ? nestId.split("-")[1] : nestId;
+        
+        // 2. Make the year prefix optional in the regex: (?:\d{4}-)?
+        // This ensures it matches BOTH "Nest #01" and "2026-Nest #01"
+        var nestRegex = new RegExp('(id:\\s*"(?:\\d{4}-)?' + cleanId + '"[\\s\\S]*?hatchedDay:\\s*)(null|"[^"]*")([\\s\\S]*?adopter:\\s*)(null|"[^"]*")');
+        
+        var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
+          // Format the new hatch date
+          var hatchString = (newHatch && newHatch.trim() !== "") ? '"' + newHatch.trim() + '"' : 'null';
+          
+          // Format the new adopter
+          var adopterString = 'null';
+          if (newAdopter && newAdopter.trim() !== "") {
+            var safeAdopter = newAdopter.trim().replace(/"/g, '\\"');
+            adopterString = '"' + safeAdopter + '"';
+          }
+          
+          // Return the newly formatted block
+          return p1 + hatchString + p3 + adopterString;
+        });
+        
+        // 3. Final safety check
+        if (newContent === currentContent) {
+          throw new Error("No changes made. (Data is identical or regex failed).");
+        }
         
         var newContent = currentContent.replace(nestRegex, function(match, p1, p2, p3, p4) {
           // Format the new hatch date
