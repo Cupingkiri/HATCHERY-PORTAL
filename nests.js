@@ -1,9 +1,20 @@
-/* 
-  WARNING: This database is the exclusive property of Reef Guardian. 
-  Unauthorized copying, extraction, or use of this data for academic or commercial 
-  purposes is a violation of copyright law. 
-  Original deployment date: [12-November-2026]. 
-*/
+/* =============================================================
+   DIGITAL SIGNATURE & OWNERSHIP WATERMARK
+   -------------------------------------------------------------
+   Author & Original Developer: Fazree (Vibecoded)
+   Project: Reef Guardian Turtle Hatchery Portal
+   Repository: HATCHERY-PORTAL
+   Creation Date: 2026
+   Signature ID: INJ@RG-TURTLE-001-2026
+
+   ⚠️ INTELLECTUAL PROPERTY NOTICE:
+   This code and the associated nest database (nests.js) are the 
+   exclusive property of the author and Reef Guardian Malaysia. 
+   Unauthorized reproduction, distribution, or claiming this 
+   work as original research/thesis is strictly prohibited.
+   Original deployment date: [11-November-2026].
+   =============================================================  */
+
 
 /* =============================================================
    nests.js — NEST DATA SOURCE  (SAFE FOR NON-TECHNICAL STAFF)
