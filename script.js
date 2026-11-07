@@ -1151,6 +1151,54 @@
           this.disabled = false;
         }
       });
+          // 7b. DELETE NEST
+    if (document.getElementById("adminDeleteBtn")) {
+      document.getElementById("adminDeleteBtn").addEventListener("click", async function() {
+        var nestId = adminNestSelect.value;
+        
+        // Extract the clean ID (e.g., "Nest #01") for the confirmation message
+        var cleanId = nestId.includes("-") ? nestId.split("-")[1] : nestId;
+        
+        // Ask for confirmation
+        var confirmDelete = confirm("⚠️ WARNING: Are you sure you want to permanently DELETE " + cleanId + "?\n\nThis action cannot be undone.");
+        if (!confirmDelete) return;
+
+        this.disabled = true;
+        adminStatus.textContent = "Deleting from GitHub...";
+        adminStatus.style.color = "#dc2626";
+        
+        try {
+          // 1. Fetch current file from GitHub
+          var getRes = await fetch(repoUrl, { headers: { "Authorization": "token " + localStorage.getItem("gh_token") } });
+          var fileData = await getRes.json();
+          var currentContent = atob(fileData.content); 
+          
+          // 2. Regex to find the ENTIRE nest block (from opening { to closing },)
+          // We look for the exact ID, capture everything until the closing brace and comma.
+          var deleteRegex = new RegExp('\\s*\\{\\s*id:\\s*"' + nestId + '"[\\s\\S]*?\\},?', 'g');
+          
+          var newContent = currentContent.replace(deleteRegex, '');
+          
+          // 3. Safety check
+          if (newContent === currentContent) {
+            throw new Error("Could not find the nest block to delete. Regex failed.");
+          }
+          
+          // 4. Push to GitHub
+          await pushToGitHub(newContent, "Admin deleted: " + nestId);
+          
+          adminStatus.textContent = "✅ Deleted! GitHub is updating. Refreshing in 15 seconds...";
+          adminStatus.style.color = "var(--emerald-600)";
+          
+          setTimeout(function() { window.location.reload(); }, 15000);
+
+        } catch (err) {
+          adminStatus.textContent = "❌ Error: " + err.message;
+          adminStatus.style.color = "red";
+          this.disabled = false;
+        }
+      });
+    }
     }
 
      // 8. ADD NEW (CREATE)
